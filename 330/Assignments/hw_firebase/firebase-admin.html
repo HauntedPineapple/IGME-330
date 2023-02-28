@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Firebase Admin</title>
+
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+
+<body>
+    <h1>High Scores</h1>
+    <!-- <ul id="score-list">
+        <li>No data yet!</li>
+    </ul> -->
+
+    <table id="score-table">
+        <tr>
+            <th>Game</th>
+            <th>User</th>
+            <th>Score</th>
+        </tr>
+    </table>
+
+    <footer>
+        <a href="./firebase-high-score.html">Firebase Score App</a>
+    </footer>
+
+    <script type="module">
+        /* #1 - The Firebase setup code goes here  - both imports, `firebaseConfig` and `app` */
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC2jpIPVfPAoFHhqGvOsaUq3AIb5GCEhKg",
+            authDomain: "high-scores-c66b9.firebaseapp.com",
+            projectId: "high-scores-c66b9",
+            storageBucket: "high-scores-c66b9.appspot.com",
+            messagingSenderId: "350875627025",
+            appId: "1:350875627025:web:24ecc0ffae67b85e5c4bb0"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // import the Firebase Realtime Database library
+        import { getDatabase, ref, set, push, onValue } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+
+        console.log(app); // make sure firebase is loaded
+
+
+        // #2 NEW STUFF
+        const db = getDatabase();
+        const scoresRef = ref(db, 'scores');
+
+        const scoresChanged = (snapshot) => {
+            // document.querySelector("#score-list").innerHTML = "";
+            document.querySelector("#score-table").innerHTML = '<tr><th>Game</th><th>User</th><th>Score</th></tr>';
+
+            snapshot.forEach(score => {
+                const childKey = score.key;
+                const childData = score.val();
+                console.log(childKey, childData);
+
+                console.log(childData.userId);
+                console.log(childData.game);
+                console.log(childData.score);
+
+                // let listItem = document.createElement("li");
+                // listItem.innerHTML = `${childData.userId} - ${childData.game} - ${childData.score}`;
+                // document.querySelector("#score-list").appendChild(listItem);
+
+                let rowItem = document.createElement("tr");
+                rowItem.innerHTML = `<td>${childData.game}</td>`;
+                rowItem.innerHTML += `<td>${childData.userId}</td>`;
+                rowItem.innerHTML += `<td>${childData.score}</td>`;
+                document.querySelector("#score-table").appendChild(rowItem);
+            });
+        }
+
+        onValue(scoresRef, scoresChanged);
+
+    </script>
+</body>
+
+</html>

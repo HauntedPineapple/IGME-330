@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Getting Started with ml5.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+    <style>
+        #result,
+        #probability {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Image classification using MobileNet</h1>
+    <p>The MobileNet model labeled this as <span id="result">...</span> with a confidence of <span
+            id="probability">...</span>.</p>
+    <img id="image" src="ml-5-images/bird.jpg" width="400" />
+
+    <script>
+        /* https://github.com/tonethar/IGME-330-Master/blob/master/notes/1-ml-pre-trained-models.md
+         * https://learn.ml5js.org/#/ 
+         * https://learn.ml5js.org/#/reference/image-classifier?id=mobilenet-model-biography */
+
+        const image = document.querySelector("#image");
+        const result = document.querySelector("#result");
+        const probability = document.querySelector("#probability");
+
+        /* https://learn.ml5js.org/#/reference/image-classifier?id=imageclassifier
+         * imageClassifier(model, ?video, ?options, ?callback);
+         * model: REQUIRED. Aw String value of a valid model OR a url to a model.json that contains a pre-trained model. Case insensitive.
+         * video: OPTIONAL. An HTMLVideoElement
+         * options: OPTIONAL. An object to change the defaults
+         * callback: OPTIONAL. A function to run once the model has been loaded. If no callback is provided, it will return a promise that will be resolved once the model has loaded. */
+        // Initialize the Image Classifier method with MobileNet
+        let mobilenet = ml5.imageClassifier("MobileNet", modelLoaded);
+
+        // When the model is loaded...
+        function modelLoaded() {
+            console.log("Model Loaded ... predicting");
+            let results = mobilenet.predict(image, predictionComplete);
+        }
+
+        function predictionComplete(error, results) {
+            if (error) {
+                console.error("ERROR! ", error);
+                return;
+            }
+            console.log("Prediction Complete! ", results);
+            
+            result.innerHTML = results[0].label;
+            probability.innerHTML = results[0].confidence.toFixed(4);
+        }
+
+        // open up your console - if everything loaded properly you should see the correct version number
+        console.log('ml5 version:', ml5.version);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>XHR - Load CSV</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>XHR - Load CSV File</h2>
+    <p>The <code>pet-names.csv</code> file contains popular dog and cat pet names, separated by commas.</p>
+    <p>Note that because XHR is loading a local file, this and the other examples will have to be run off a web server
+        rather than from your computer's hard drive (e.g. banjo.rit.edu or VSCode's liveserver etc)</p>
+
+    <hr>
+    <button id="my-button">Load Data</button>
+    <div id="output">Click button to load</div>
+
+
+    <script>
+        document.querySelector("#my-button").onclick = loadCSVXHR;
+
+        function loadCSVXHR() {
+            const url = "data/pet-names.csv";
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = (e) => {
+                console.log(`In onload - HTTP Status Code - ${e.target.status}`);
+                const text = e.target.responseText;
+                console.log(`Success, the file length is ${text.length}`);
+                const lines = text.split("\n"); // makes arrays based on the lines of the csv
+                const dogNames = lines[0].split(","); 
+                const catNames = lines[1].split(","); 
+                const birdNames = lines[2].split(","); 
+
+                const dogHTML = listToHTML(dogNames);
+                const catHTML = listToHTML(catNames);
+                const birdHTML = listToHTML(birdNames);
+
+                const newHTML = `
+                <h3>Dog Names</h3>
+                ${dogHTML}
+                <h3>Cat Names</h3>
+                ${catHTML}
+                <h3>Bird Names</h3>
+                ${birdHTML}`;
+
+                document.querySelector("#output").innerHTML = newHTML;
+            };
+
+            xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+            xhr.open("GET", url);
+            xhr.send();
+        }
+
+        function listToHTML(array){
+            return `<ol>${array.map(item => `<li>${item}</li>`).join('')}</ol>`;
+        }
+    </script>
+</body>
+
+</html>

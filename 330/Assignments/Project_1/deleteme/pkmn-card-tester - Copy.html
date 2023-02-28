@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Tester</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Andada+Pro&family=IBM+Plex+Sans+Thai+Looped&family=Prompt&display=swap"
+        rel="stylesheet">
+
+
+
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <pkmn-header data-src="../images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+    <!-- <h1 class="is-size-1 px-4 py-3 has-background-info">PokeFinder App</h1> -->
+
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <img class="navbar-item" src="../images/Poké_Ball_icon.svg" alt="pokeball" width="50">
+            <a class="navbar-burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-start">
+                <b class="navbar-item"> Home </b>
+                <p class="navbar-item is-hoverable"> App </p>
+                <p class="navbar-item is-hoverable"> Favorites </p>
+                <p class="navbar-item is-hoverable"> Documentation </p>
+            </div>
+        </div>
+    </nav>
+    <!-- <my-navbar></my-navbar> -->
+
+
+
+    <div class="tile is-ancestor is-vertical m-5" id="cards-output">
+        <div class="tile is-parent">
+            <pkmn-card></pkmn-card>
+            <pkmn-card></pkmn-card>
+            <pkmn-card></pkmn-card>
+            <pkmn-card></pkmn-card>
+        </div>
+    </div>
+
+    <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+        data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+        data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+
+        <!-- Web Components Polyfill for older browsers -->
+        <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="../src/pkmn-card.js"></script>
+    <script type="module" src="../src/pkmn-card-row.js"></script>
+    <script type="module" src="../src/pkmn-header.js"></script>
+    <script type="module" src="../src/pkmn-footer.js"></script>
+</body>
+
+</html>

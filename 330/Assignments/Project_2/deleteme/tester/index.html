@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Audio Visualizer</title>
+    <link href="./styles/default-styles.css" type="text/css" rel="stylesheet" />
+    <script src="./src/loader.js" type="module"></script>
+</head>
+
+<body>
+    <main>
+        <canvas width="800" height="800"></canvas>
+        <div id="controls">
+            <section class="control-section">
+                <button id="play-button" data-playing="no"></button>
+                <button id="fs-button">Full Screen</button>
+
+                <label>Track:
+                    <select id="track-select">
+                        <option value="media/New Adventure Theme.mp3">New Adventure Theme</option>
+                        <option value="media/Peanuts Theme.mp3">Peanuts Theme</option>
+                        <option value="media/The Picard Song.mp3">The Picard Song</option>
+                        <option value="media/murmurs_from_the_land_forbidden.mp3" selected>Murmurs from the Land Forbidden</option>
+                        <option value="media/crown_the_empire-millennia.mp3">Millenia</option>
+                    </select>
+                </label>
+            </section>
+
+            <section class="control-section">
+                Volume: <input type="range" id="volume-slider" min="0" max="2" value="1" step="0.01">
+                <span id="volume-label">???</span>
+            </section>
+
+            <section>
+                <span><input type="checkbox" id="gradient-checkbox"><label for="gradient-checkbox">Show Gradient</label></span>
+                <span><input type="checkbox" id="bars-checkbox"><label for="bars-checkbox">Show Bars</label></span>
+                <span><input type="checkbox" id="circles-checkbox"><label for="circles-checkbox">Show Circles</label></span>
+                <span><input type="checkbox" id="noise-checkbox"><label for="noise-checkbox">Show Noise</label></span>
+                <span><input type="checkbox" id="invert-checkbox"><label for="invert-checkbox">Show Invert</label></span>
+                <span><input type="checkbox" id="emboss-checkbox"><label for="emboss-checkbox">Show Emboss</label></span>
+                <!-- <span><input type="checkbox" id="ELEMENT-checkbox"><label for="ELEMENT-checkbox">Show ELEMENT</label></span> -->
+              </section>
+        </div>
+    </main>
+</body>
+
+</html>

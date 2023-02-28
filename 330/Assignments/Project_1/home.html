@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project 1 Home</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/home-style.css">
+
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/loader.js"></script>
+</head>
+
+<body>
+    <header>
+        <pkmn-header data-src="images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+
+        <pkmn-navbar data-app="./app.html" data-favorites="./favorites.html" data-community="./community.html"
+            data-documentation="./documentation.html"></pkmn-navbar>
+
+        <!-- <h2 class="is-size-3 px-2 has-text-weight-bold">Home Page</h2> -->
+    </header>
+
+    <main>
+        <section id="hero" class="hero is-medium">
+            <img id="background" src="images/pokemon-Legends-Arceus-background.jpg" alt="pokémon banner">
+            <div id="description" class="hero-body px-4 py-4">
+                <p class="is-size-5">
+                    PokéFinder is a web app powered by <a href="https://pokeapi.co/">PokéApi</a>.
+                    You can search pokémon by name and filter results by various genres such as types and generations.
+                    If you leave the search field empty you can search all pokémon and use the filters to find the types
+                    of pokémon you want. The favorites page will allow you to store pokémon information for your convenience.
+                </p>
+                <p class="has-text-centered has-text-white has-background-danger is-size-5 has-text-weight-bold is-family-monospace">
+                    As of right now, the PokéFinder App only searches and displays pokémon from generations 1-7. Sword & Shield data has not yet been added.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+        data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+        data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Sine Start</title>
+    <link rel="stylesheet" type="text/css" href="styles/default-style.css">
+    <script src="src/main.js"></script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <section>
+        <div class="controls" id="buttons">
+            <button id="play-button">Play</button>
+            <button id="pause-button" class="disabled">Pause</button>
+            <label class="dropdown">Color:
+                <select id="color-dropdown">
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="black" selected>Black</option>
+                </select>
+            </label>
+            <label class="dropdown">FPS:
+                <select id="fps-dropdown">
+                    <option value="12">12</option>
+                    <option value="24" selected>24</option>
+                    <option value="30">30</option>
+                    <option value="60">60</option>
+                </select>
+            </label>
+        </div>
+        <div class="controls" id="wave-type">
+            <input type="radio" id="sin" name="wave_type" value="sin">
+            <label for="sin">Sine</label><br>
+            <input type="radio" id="cos" name="wave_type" value="cos">
+            <label for="cos">Cosine</label><br>
+            <input type="radio" id="tan" name="wave_type" value="tan">
+            <label for="tan">Tangent</label>
+        </div>
+    </section>
+</body>
+
+</html>

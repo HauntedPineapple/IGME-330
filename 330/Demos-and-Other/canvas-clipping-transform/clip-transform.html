@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>\
+    <script src="./clip-for-transform-demo.js"></script>
+    <script>
+        // https://github.com/tonethar/IGME-330-Master/blob/master/notes/8-canvas-transformations.md
+        'use strict';
+
+        let canvasWidth = 640, canvasHeight = 480;
+        let ctx, canvas;
+        let playButton, pauseButton;
+        let isPaused = true;
+
+        window.onload = init;
+
+        function init() {
+            console.log("page loaded!");
+
+            canvas = document.querySelector('canvas');
+            ctx = canvas.getContext('2d');
+
+            canvas.setAttribute("width", canvasWidth);
+            canvas.setAttribute("height", canvasHeight);
+            console.log("Canvas width: ", canvasWidth);
+            console.log("Canvas height: ", canvasHeight);
+
+            drawSquare2(ctx, 200, 100, 100, 100, Math.PI / 4.0, "purple", 0.75);
+            drawSquare2(ctx, 350, 100, 100, 100, Math.PI / 4.0, "purple", 1.0);
+            drawSquare2(ctx, 500, 100, 100, 100, Math.PI / 4.0, "purple", 1.25);
+
+            //update();
+        }
+
+        function setupUI() {
+            // document.querySelector("#name-button").onclick = ()=>{}
+        }
+
+        function drawSquare2(ctx, x, y, width, height, rotation, fillStyle, scale) {
+            ctx.save();  // save the old state attributes
+            ctx.fillStyle = fillStyle;
+            ctx.translate(x, y);
+            ctx.rotate(rotation);
+            ctx.scale(scale, scale);
+            // now we'll draw from the center to get the rotation right
+            ctx.fillRect(0 - width / 2, 0 - height / 2, width, height);
+            ctx.restore();
+            // the old state attributes are restored, ctx is 
+            // as it was before this function was called
+        }
+
+        function update() {
+            if (isPaused) {
+                return;
+            }
+            requestAnimationFrame(update);
+            // CODE HERE
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <!-- <button id="name-button">NAME</button> -->
+    </section>
+</body>
+
+</html>

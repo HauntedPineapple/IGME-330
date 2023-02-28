@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>About</title>
+
+    <!-- Google Fonts Embed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-style.css">
+    <link rel="stylesheet" type="text/css" href="styles/about-style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+
+    <!-- javascript -->
+    <script type="module" src="src/loader.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <custom-header data-title="Audio-Visual Playground"></custom-header>
+            <custom-navbar data-link1-name="About" data-link2-name="App" data-link2-url="./app.html"
+                data-link3-name="Documentation" data-link3-url="./documentation.html">
+            </custom-navbar>
+        </header>
+
+        <img id="hero" src="./data/images/equalizer.jpg" alt="an equalizer image">
+
+        <main>
+            <h1 class="has-text-centered-mobile is-underlined">About</h1>
+            <p>
+                Welcome to the audio-visual playground! Here you can customize your experience in numerous ways, adjust
+                the colors, the size of the lines, the type of lines, etc...
+                There are also some presets (that may be added to in the future) if you don't know where to start.
+                You can also upload any .mp3 file you'd like to see how your music looks. Have fun!
+            </p>
+        </main>
+    </div>
+    <footer>
+        <custom-footer data-link1-name="Audrey Main" data-link1-url="https://www.linkedin.com/in/audrey-main/"
+            data-link2-name="IGME-330" data-link2-url="https://people.rit.edu/aam6039/330/" data-link5-name="GitHub"
+            data-link5-url="https://github.com/HauntedPineapple" data-link6-name="PokeFinder"
+            data-link6-url="https://people.rit.edu/aam6039/330/Assignments/Project_1/home.html"></custom-footer>
+    </footer>
+</body>
+
+</html>

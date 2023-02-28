@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'pokemon_hollownormal';
+    src: url('../data/pokemon_hollow-webfont.woff2') format('woff2'),
+         url('../data/pokemon_hollow-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'pokemon_solidnormal';
+    src: url('../data/pokemon_solid-webfont.woff2') format('woff2'),
+         url('../data/pokemon_solid-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1{
+    font-size: 2.5rem;
+    font-family: 'pokemon_solidnormal', sans-serif;
+}
+
+body{
+    font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+}
+
+ul{
+    list-style-type: circle;
+}
+
+pkmn-card:hover{
+    transform: scale(1.01);
+}
+
+#search-form {
+    padding: 25px;
+    margin: 10px;
+
+    border: solid 1px rgb(131, 131, 131);
+}
+
+#favorites-controls{
+    margin: 3px 8px;
+
+    border: solid 1px rgb(131, 131, 131);
+}
+
+#output {
+    padding: 15px;
+    margin: 8px;
+}

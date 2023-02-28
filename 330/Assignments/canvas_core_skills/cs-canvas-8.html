@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Eigth Canvas</title>
+    <link rel="stylesheet" type="text/css" href="styles/canvas-style.css">
+    <script>
+        // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations
+        // https://github.com/tonethar/IGME-330-Master/blob/master/notes/8-canvas-transformations.md
+        'use strict';
+
+        let canvasWidth = 600, canvasHeight = 600;
+        let ctx, canvas;
+        let playButton, pauseButton;
+        let isPaused = true;
+
+        window.onload = init;
+
+        function init() {
+            console.log("page loaded!");
+
+            canvas = document.querySelector('canvas');
+            ctx = canvas.getContext('2d');
+
+            canvas.setAttribute("width", canvasWidth);
+            canvas.setAttribute("height", canvasHeight);
+            console.log("Canvas width: ", canvasWidth);
+            console.log("Canvas height: ", canvasHeight);
+
+            setupUI();
+
+            drawGrid(ctx, canvasWidth / 20, canvasHeight / 20);
+            drawDividers();
+
+            // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate
+            ctx.translate(canvasWidth / 2, canvasHeight / 2); // move origin to the center
+            ctx.fillStyle = 'red';
+            ctx.fillRect(10, 10, 90, 90);
+            // Resets current transformation matrix to the identity matrix
+            ctx.resetTransform();
+            ctx.fillStyle = 'green';
+            ctx.fillRect(10, 10, 90, 90);
+            ctx.beginPath();
+            ctx.strokeStyle = 'orange';
+            ctx.lineWidth = 5;
+            ctx.moveTo(10, 10);
+            ctx.lineTo((canvasWidth / 2) + 10, canvasHeight / 2 + 10);
+            ctx.stroke();
+            ctx.closePath();
+
+            // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate
+            // Point of transform origin
+            // ctx.arc(0, 0, 10, 0, 2 * Math.PI);
+            // ctx.fillStyle = 'blue';
+            // ctx.fill();
+            ctx.beginPath();
+            // Non-rotated rectangle
+            ctx.fillStyle = 'green';
+            ctx.fillRect(200, 0, 80, 80);
+            // Rotated rectangle
+            ctx.rotate(65 * Math.PI / 180);
+            ctx.fillStyle = 'red';
+            ctx.fillRect(200, 0, 80, 80);
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.strokeStyle = 'blue';
+            ctx.arc(0, 0, 200, 0, 65 * Math.PI / 180, true);
+            ctx.stroke();
+            ctx.closePath();
+
+
+            //update();
+        }
+
+        function setupUI() {
+            canvas.onclick = canvasClicked;
+
+            // document.querySelector("#name-button").onclick = ()=>{}
+        }
+
+        function update() {
+            if (isPaused) {
+                return;
+            }
+            requestAnimationFrame(update);
+            // CODE HERE
+        }
+
+        // #region Event Handlers
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log("(" + mouseX + ", " + mouseY + ")");
+        }
+        // #endregion
+
+        function drawGrid(ctx, cellWidth, cellHeight, color = "rgba(100, 100, 100, 0.5)") {
+            // save the current drawing state as it existed before this function was called
+            ctx.save();
+            // set some drawing state variables
+            ctx.strokeStyle = color;
+
+            // vertical lines
+            for (let x = cellWidth + 0.5; x < ctx.canvas.width; x += cellWidth) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, ctx.canvas.height);
+                ctx.stroke();
+            }
+
+            // Horizontal lines
+            for (let y = cellHeight + 0.5; y < ctx.canvas.height; y += cellHeight) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(ctx.canvas.width, y);
+                ctx.stroke();
+            }
+
+            // restore the drawing state
+            ctx.restore();
+        };
+
+        function drawDividers() {
+            ctx.save();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <!-- <button id="name-button">NAME</button> -->
+    </section>
+</body>
+
+</html>

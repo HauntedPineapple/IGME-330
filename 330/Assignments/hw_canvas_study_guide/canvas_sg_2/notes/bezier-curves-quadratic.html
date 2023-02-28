@@ -1,0 +1,69 @@
+<html>
+
+<head>
+    <title>Quadratic Bezier Curves</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: rgb(241, 241, 241);
+        }
+    </style>
+    <script>
+        // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+        "use strict";
+        let canvas, ctx;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+            quadraticCurve()
+        }
+
+        // Quadratic Bezier Curves: Requires 2 points, one control point and one end point
+        // quadraticCurveTo(cpx, cpy, x, y)
+        function quadraticCurve() {
+            ctx.save();
+            ctx.lineWidth = 3;
+
+            // Define the points as {x, y}
+            let start = { x: 300, y: 200 };
+            let cp = { x: 425, y: 250 };
+            let end = { x: 500, y: 115 };
+
+            // Start Point: (x, y)
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI);  // Start point
+            ctx.closePath();
+            ctx.fill();
+
+            // Quadratic Bézier curve
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.quadraticCurveTo(cp.x, cp.y, end.x, end.y);
+            ctx.stroke();
+
+            // End Point: (x, y)
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fill();
+
+            // Control Point: (x, y)
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(cp.x, cp.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+    </script>
+</head>
+
+<body onload="init()"> 
+    <canvas height="800" width="700"></canvas>
+</body>
+
+</html>

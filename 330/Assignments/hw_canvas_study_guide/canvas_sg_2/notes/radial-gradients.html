@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <title>Radial Gradient Examples</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: aliceblue;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <script>
+        // https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/GradientsandPatterns/GradientsandPatterns.html#//apple_ref/doc/uid/TP40010542-CH4-SW15
+        "use strict";
+        let canvas, ctx;
+        const startX = 65, startY = 65;
+        const topDownPad = 10, rightLeftPad = 10;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+            drawGradients();
+        }
+
+        // A radial gradient defines a color change along a cone between two circles
+        function drawGradients() {
+            let x = startX, y = startY;
+            let radius = 50;
+
+            // createRadialGradient(x, y, rad, x1, y1, rad1)
+            // The two circles between which the color change occurs
+            let grad = ctx.createRadialGradient(x, y, 5, x, y, 50);
+            // A color stop consists of a color and a position between 0 and 1, 
+            // inclusive, where 0 is the beginning of the gradient and 1 is the end
+            grad.addColorStop(0, 'white');
+            grad.addColorStop(1, 'black');
+            ctx.beginPath();
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI); // arc(x,y,radius,startAngle,endAngle)
+            ctx.fill();
+            ctx.closePath();
+
+            x += radius * 2 + rightLeftPad;
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x - 15, y - 15, 5, x, y, 50);
+            grad.addColorStop(0, 'white');
+            grad.addColorStop(1, 'black');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            x += radius * 2 + rightLeftPad;
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x + 15, y + 15, 5, x, y, 50);
+            grad.addColorStop(0, 'white');
+            grad.addColorStop(1, 'black');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            x += radius * 2 + rightLeftPad;
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x, y, 5, x + 15, y + 15, 50);
+            grad.addColorStop(0, 'white');
+            grad.addColorStop(1, 'black');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            x += radius * 2 + rightLeftPad;
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x, y, 5, x - 15, y - 15, 50);
+            grad.addColorStop(0, 'white');
+            grad.addColorStop(1, 'black');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            x = startX;
+            y += radius * 2 + topDownPad; // next row
+
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x, y, radius / 100, x, y, radius);
+            grad.addColorStop(0, 'red');
+            grad.addColorStop(1 / 2, 'orange');
+            grad.addColorStop(1, 'yellow');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            x += radius * 2 + rightLeftPad;
+            ctx.beginPath();
+            grad = ctx.createRadialGradient(x, y, radius / 10, x, y, radius);
+            grad.addColorStop(0, 'aqua');
+            grad.addColorStop(1/2, 'blue');
+            grad.addColorStop(1, 'purple');
+            ctx.fillStyle = grad;
+            ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            ctx.fill();
+            ctx.closePath();
+
+            // x += radius * 2 + rightLeftPad;
+            // ctx.beginPath();
+            // grad = ctx.createRadialGradient(x, y, radius / 10, x, y, radius);
+            // grad.addColorStop(0, 'white');
+            // grad.addColorStop(1, 'black');
+            // ctx.fillStyle = grad;
+            // ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.closePath();
+
+            // x += radius * 2 + rightLeftPad;
+            // ctx.beginPath();
+            // grad = ctx.createRadialGradient(x, y, radius / 10, x, y, radius);
+            // grad.addColorStop(0, 'white');
+            // grad.addColorStop(1, 'black');
+            // ctx.fillStyle = grad;
+            // ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.closePath();
+
+            // x += radius * 2 + rightLeftPad;
+            // ctx.beginPath();
+            // grad = ctx.createRadialGradient(x, y, radius / 10, x, y, radius);
+            // grad.addColorStop(0, 'white');
+            // grad.addColorStop(1, 'black');
+            // ctx.fillStyle = grad;
+            // ctx.arc(x, y, radius, 0, 2 * Math.PI);
+            // ctx.fill();
+            // ctx.closePath();
+        }
+
+    </script>
+</head>
+
+<body onload="init()"> <canvas height="250" width="570">
+    </canvas>
+</body>
+
+</html>

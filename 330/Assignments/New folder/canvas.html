@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Eigth Canvas</title>
+    <!-- <script src="./canvas-helpers.js" type="module"></script> -->
+    <style>
+        * {
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        body {
+            background-color: #808080;
+        }
+
+        canvas {
+            background-color: #fff;
+            border: 1px solid #808080;
+            box-shadow: 0px 10px 13px -7px rgb(0, 0, 0), 5px 5px 15px 5px rgba(110, 110, 110, 0.25);
+            margin: 10px;
+        }
+    </style>
+
+    <script>
+        let ctx, canvas;
+        let canvasWidth, canvasHeight;
+        window.onload = () => {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext('2d');
+            canvasWidth = canvas.getAttribute("width");
+            canvasHeight = canvas.getAttribute("height");
+
+            canvas.onclick = canvasClicked;
+
+            ctx.fillStyle = "#3222d9";
+            ctx.strokeStyle = "#de6d35";
+            ctx.lineWidth = 5;
+
+            document.querySelector("#circle-button").onclick = () => {
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            }
+
+            document.querySelector("#rectangle-button").onclick = () => {
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                drawRectangle(ctx, canvasWidth / 4, canvasHeight / 4, canvasWidth / 2, canvasHeight / 2, ctx.fillStyle, ctx.lineWidth, ctx.strokeStyle);
+            }
+
+            document.querySelector("#line-button").onclick = () => {
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            }
+
+            document.querySelector("#ring-button").onclick = () => {
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+            }
+
+            // document.querySelector("#name-button").onclick = () =>{}
+        }
+
+        function drawRectangle(ctx, x, y, width, height, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
+            ctx.save();
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.closePath();
+            ctx.fillStyle = fillStyle;
+            ctx.fill();
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        function drawCircle(ctx, x, y, radius, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
+            drawArc(ctx, x, y, radius, fillStyle, lineWidth, strokeStyle);
+        }
+
+        function drawArc(ctx, x, y, radius, fillStyle = "black", lineWidth = 0, strokeStyle = "black", startAngle = 0, endAngle = Math.PI * 2) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(x, y, radius, startAngle, endAngle, false);
+            ctx.fillStyle = fillStyle;
+            ctx.fill();
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        function drawLine(ctx, x1, y1, x2, y2, lineWidth = 1, strokeStyle = "black") {
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = strokeStyle;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        // #region
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        function getRandomRGBAColor(alpha = 0.8) {
+            function getByte() {
+                return 55 + Math.round(Math.random() * 200);
+            }
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + `, ${alpha})`;
+        }
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log("(" + mouseX + ", " + mouseY + ")");
+        }
+// #endregion
+
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <button id="circle-button">Circle</button>
+        <button id="rectangle-button">Rectangle</button>
+        <button id="line-button">Line</button>
+        <button id="ring-button">Ring</button>
+        <!-- <button id="name-button">NAME</button> -->
+    </section>
+</body>
+
+</html>

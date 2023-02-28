@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>XHR - Load JSON</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>XHR - Load JSON File</h2>
+    <p>The <code>pet-names.json</code> file contains popular dog and cat pet names, separated by commas.</p>
+    <p>Note that because XHR is loading a local file, this and the other examples will have to be run off a web server
+        rather than from your computer's hard drive (e.g. banjo.rit.edu or VSCode's liveserver etc)</p>
+
+    <hr>
+    <button id="my-button">Load Data</button>
+    <div id="output">Click button to load</div>
+
+
+    <script>
+        document.querySelector("#my-button").onclick = loadJSONXHR;
+
+        function loadJSONXHR() {
+            const url = "data/pet-names.json";
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = (e) => {
+                console.log(`In onload - HTTP Status Code - ${e.target.status}`);
+                
+                const text = e.target.responseText;
+                const json = JSON.parse(text);
+                const keyArray = Object.keys(json); // gets the keys
+                let html = "";
+               
+                for (let k of keyArray) { 
+                    // loop through the keys and look at the object linked to the specific key
+                    const obj = json[k];
+                    html += `<h3>${obj.title = obj.title ? obj.title : "No title found"}</h3>`; // ternary operator that checks to see if there is a title
+                    html += `<ol>${obj["namelist"].map(item => `<li>${item}</li>`).join('')}</ol>`; //we get the data from obj that is tagged as "namelist"
+                }
+
+                document.querySelector("#output").innerHTML = html;
+            };
+
+            xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+            xhr.open("GET", url);
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>

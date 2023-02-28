@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Audio-Visual Playground</title>
+
+    <!-- Google Fonts Embed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-style.css">
+    <link rel="stylesheet" type="text/css" href="styles/app-style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+
+    <!-- javascript -->
+    <script type="module" src="src/loader.js"></script>
+    <script type="module" src="src/main.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <custom-header data-title="Audio-Visual Playground" data-page="App"></custom-header>
+            <custom-navbar data-link1-name="About" data-link1-url="./about.html" data-link2-name="App"
+                data-link3-name="Documentation" data-link3-url="./documentation.html">
+            </custom-navbar>
+        </header>
+
+        <div id="canvas">
+            <canvas></canvas>
+        </div>
+
+        <main>
+            <div id="audio-row" class="controls-row">
+                <div class="form">
+                    <!-- <button class="button" id="play-button" data-playing="no"></button> -->
+                    <audio controls id="audio-player"></audio>
+                </div>
+                <div class="select form is-normal">
+                    <select name="track-selector" id="track-selector">
+                        <!-- <option class="placeholder" selected disabled="disabled" value="">Select A Track</option> -->
+                        <option value="./data/audio/New Adventure Theme.mp3">New Adventure Theme</option>
+                        <option value="./data/audio/Peanuts Theme.mp3">Peanuts Theme</option>
+                        <option value="./data/audio/murmurs_from_the_land_forbidden.mp3">Murmurs From The Land Forbidden
+                        </option>
+                        <!-- <option value="./data/audio/millenia.mp3">Millenia</option> -->
+                        <option value="./data/audio/bubbles.mp3">Bubbles</option>
+                        <option value="./data/audio/cosmic_creature.mp3">Cosmic Creature</option>
+                        <option value="upload">Uploaded File</option>
+                        <!-- <option value="VALUE.mp3">VALUE</option> -->
+                    </select>
+                </div>
+                <div id="file-input" class="file">
+                    <label class="file-label">
+                        <input id="file-uploader" class="file-input" type="file" accept="audio/*">
+                        <span class="file-cta">
+                            <img class="file-icon" src="data/images/musical-note.png" alt="">
+                            <span class="file-label">Choose a file…</span>
+                        </span>
+                    </label>
+                    <span id="file-name" class="file-name has-background-white">No file selected</span>
+                </div>
+                <!-- <div> <button id="fs-button" class="button is-info">Full Screen</button></div> -->
+                <!-- <div> <button id="preset-button" class="button is-info">Log Settings</button></div> -->
+                <div id="preset-row" class="select form is-normal">
+                    <select name="preset-selector" id="preset-selector">
+                        <option class="placeholder" selected disabled="disabled" value="">Select Preset</option>
+                        <option value="0">Default</option>
+                    </select>
+                </div>
+            </div>
+            <hr>
+
+            <div id="mode-row" class="controls-row">
+                <span id="mode-radios" class="control">
+                    <b>Mode:</b>
+                    <label class="radio">
+                        <input type="radio" name="mode" value="linear">
+                        Linear
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="mode" value="radial">
+                        Radial
+                    </label>
+                </span>
+                <span id="display-radios" class="control">
+                    <b>Display As:</b>
+                    <label class="radio">
+                        <input type="radio" name="display" value="lines">
+                        Lines
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="display" value="bars">
+                        Bars
+                    </label>
+                    <!-- <label class="radio" disabled>
+                        <input type="radio" name="display" value="waves" disabled>
+                        Wavelength
+                    </label> -->
+                </span>
+            </div>
+            <hr>
+
+            <div id="color-position-size-row" class="controls-row">
+                <section id="size">
+                    <b class="is-underlined control-heading">Size</b>
+                    <div class="form">
+                        <div id="linewidth-slider" class="field">
+                            <label for="linewidth-size">Line Thickness: <span id="linewidth-label"></span></label>
+                            <div class="slider">
+                                <p class="min-label">1</p>
+                                <input type="range" min="1" max="25" value="5" id="linewidth-size">
+                                <p class="max-label">25</p>
+                            </div>
+                        </div>
+                        <div id="barwidth-slider" class="field hidden">
+                            <label for="barwidth-size">Bar Thickness: <span id="barwidth-label"></span></label>
+                            <div class="slider">
+                                <p class="min-label">1</p>
+                                <input type="range" min="1" max="25" value="5" id="barwidth-size">
+                                <p class="max-label">25</p>
+                            </div>
+                        </div>
+                        <div id="baselineposition-slider" class="field">
+                            <label for="baselineposition-size">Baseline Position: <span
+                                    id="baselineposition-label"></span></label>
+                            <div class="slider">
+                                <p class="min-label">0</p>
+                                <input type="range" min="0" max="300" value="5" id="baselineposition-size">
+                                <p class="max-label">300</p>
+                            </div>
+                        </div>
+                        <div id="spacing-slider" class="field">
+                            <label for="spacing-size">Spacing: <span id="spacing-label"></span></label>
+                            <div class="slider">
+                                <p class="min-label">0</p>
+                                <input type="range" min="0" max="10" value="1" id="spacing-size">
+                                <p class="max-label">10</p>
+                            </div>
+                        </div>
+                        <div id="density-slider" class="field">
+                            <label for="density-size"># of Samples: <span id="density-label"></span></label>
+                            <div class="slider">
+                                <p class="min-label">32</p>
+                                <input type="range" min="0" max="5" value="2" id="density-size">
+                                <p class="max-label">1024</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="position">
+                    <b class="is-underlined control-heading">Position</b>
+                    <div class="form">
+                        <section class="field">
+                            <b>Placement:</b>
+                            <div id="placement-radios" class="control">
+                                <label id="top" class="radio">
+                                    <input type="radio" name="placement" value="top">
+                                    Top
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="placement" value="middle">
+                                    Middle
+                                </label>
+                                <label id="bottom" class="radio">
+                                    <input type="radio" name="placement" value="bottom" checked>
+                                    Bottom
+                                </label>
+                            </div>
+                        </section>
+                        <section class="field">
+                            <b>Orientation:</b>
+                            <div id="orientation-radios" class="control">
+                                <label class="radio">
+                                    <input type="radio" name="orientation" value="horizontal" checked>
+                                    Horizontal
+                                </label>
+                                <label class="radio">
+                                    <input type="radio" name="orientation" value="vertical">
+                                    Vertical
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+                <section id="color">
+                    <b class="is-underlined control-heading">Color</b>
+                    <div class="form">
+                        <div class="field" id="background-picker">
+                            <input id="background-color-picker" class="control" type="color" value="#000000">
+                            <label id="background-color-label" for="background-color-picker">Background Color</label>
+                        </div>
+                        <div class="field" id="fill-picker">
+                            <input id="fill-color-picker" class="control" type="color" value="#878787">
+                            <label id="fill-color-label" for="fill-color-picker">Fill Color</label>
+                        </div>
+                        <div class="field" id="line-picker">
+                            <input id="line-color-picker" class="control" type="color" value="#FFFFFF">
+                            <label id="line-color-label" for="line-color-picker">Line Color</label>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- <hr><div id="effects-row" class="controls-row"></div> -->
+        </main>
+    </div>
+
+    <footer>
+        <custom-footer data-link1-name="Audrey Main" data-link1-url="https://www.linkedin.com/in/audrey-main/"
+            data-link2-name="IGME-330" data-link2-url="https://people.rit.edu/aam6039/330/" data-link5-name="GitHub"
+            data-link5-url="https://github.com/HauntedPineapple" data-link6-name="PokeFinder"
+            data-link6-url="https://people.rit.edu/aam6039/330/Assignments/Project_1/home.html"></custom-footer>
+    </footer>
+</body>
+
+</html>

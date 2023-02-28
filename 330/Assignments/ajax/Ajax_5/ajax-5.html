@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Fetch - Load JSON</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>Fetch - Load JSON File</h2>
+    <hr>
+    <button id="my-button">Load Data</button>
+    <div id="output">Click button to load</div>
+
+    <script>
+        document.querySelector("#my-button").onclick = loadJsonFetch;
+
+        // HW
+        function loadJsonFetch() {
+            fetch("data/pet-names.json")
+                .then(response => {
+                    if (response.ok) { // If the response is successful, return the JSON
+                        return response.json();
+                    }
+                    // Else throw an error that will be caught below
+                    return response.text().then(text => {
+                        throw text;
+                    });
+                }) // send the response.json() to the next .then()
+                .then(json => {
+                    // the second promise is resolved and 'json' is a JSON object
+                    const keyArray = Object.keys(json); // gets the keys
+                let html = "";
+               
+                for (let k of keyArray) { 
+                    // loop through the keys and look at the object linked to the specific key
+                    const obj = json[k];
+                    html += `<h3>${obj.title = obj.title ? obj.title : "No title found"}</h3>`; // ternary operator that checks to see if there is a title
+                    html += `<ol>${obj["namelist"].map(item => `<li>${item}</li>`).join('')}</ol>`; //we get the data from obj that is tagged as "namelist"
+                }
+
+                document.querySelector("#output").innerHTML = html;
+                }).catch(error => { 
+                    // will be called when the promise "rejects"
+                    document.querySelector("#output").innerHTML = `<b>ERROR: ${error}</b>`;
+                    console.log(error);
+                });
+        }
+
+        // I-A. A basic fetch() request
+        function loadJsonFetchA() {
+            const promise = fetch('https://swapi.dev/api/people/1'); // get a Star Wars character
+            console.log(promise); // "Promise {<pending>}"
+            document.querySelector("#output").innerHTML = "check the console";
+        }
+
+        // I-B. Hooking into Promise.then() and Promise.catch()
+        function loadJsonFetchB() {
+            fetch('https://swapi.dev/api/people/1')
+                .then(response => { // will be called when the promise "resolves"
+                    console.log(response); // "Response {type: 'cors', url: 'https://swapi.dev/api/people/1', redirected: false, status: 200, ok: true, …}"
+                    console.log(response.json()); // "Promise {<pending>}"
+                    // we don't yet have access to the actual response data (the JSON) because this second promise has not yet resolved
+                }).catch(error => { // will be called when the promise "rejects"
+                    console.log(error);
+                });
+            document.querySelector("#output").innerHTML = "check the console";
+        }
+
+        // I-C. Resolving the response.json() promise
+        function loadJsonFetchC() { // the JSON object is created for us automatically, thus we don't have to call JSON.parse(e.target.responseText)
+            fetch('https://swapi.dev/api/people/1')
+                .then(response => response.json()) // chain the response.json() promise to the next .then()
+                .then(json => { // the second promise is resolved and 'json' is a JSON object
+                    console.log(json); // "{name: 'Luke Skywalker', height: '172', mass: '77', hair_color: 'blond', skin_color: 'fair', …}"
+                    console.log(json.name); // "Luke Skywalker"
+                    console.log(json.homeworld); // "https://swapi.dev/api/planets/1/""
+                }).catch(error => { // will be called when the promise "rejects"
+                    console.log(error);
+                });
+            document.querySelector("#output").innerHTML = "check the console";
+        }
+
+        // I-D. The response.ok property
+        function loadJsonFetchD() { // the JSON object is created for us automatically, thus we don't have to call JSON.parse(e.target.responseText)
+            fetch('https://swapi.dev/api/people/1')
+                .then(response => {
+                    // If the response is successful, return the JSON
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    // Else throw an error that will be caught below
+                    return response.text().then(text => {
+                        throw text;
+                    });
+                }) // send the response.json() to the next .then()
+                .then(json => {// the second promise is resolved and 'json' is a JSON object
+                    console.log(json); // "{name: 'Luke Skywalker', height: '172', mass: '77', hair_color: 'blond', skin_color: 'fair', …}"
+                    console.log(json.name); // "Luke Skywalker"
+                    console.log(json.homeworld); // "https://swapi.dev/api/planets/1/""
+                }).catch(error => { // will be called when the promise "rejects"
+                    console.log(error);
+                });
+            document.querySelector("#output").innerHTML = "check the console";
+        }
+    </script>
+</body>
+
+</html>

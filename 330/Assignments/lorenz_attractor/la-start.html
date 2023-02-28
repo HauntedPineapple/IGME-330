@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lorenz Attractor</title>
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <!-- <script src="src/main.js"></script> -->
+    <script>
+        let ctx, canvas;
+        let isPaused = false;
+        let scale = 8;
+        let counter = 0;
+        const canvasWidth = 800, canvasHeight = 600;
+        // https://en.wikipedia.org/wiki/Lorenz_system        
+        let x = .01; // x is proportional to the rate of convection
+        // dx/dt = sigma(y - x)
+        let y = 0; // y is proportional to the horizontal temperature variation
+        // dy/dt = x(rho - z) - y
+        let z = 0; // z is proportional to the vertical temperature variation
+        // dz/dt = xy - (beta*z)
+        let a = 10, b = 28, c = 8 / 3;
+        // a = sigma, b = rho, c = beta
+
+        window.onload = init;
+        function init() {
+            canvas = document.querySelector('canvas');
+            ctx = canvas.getContext("2d");
+            canvas.width = canvasWidth;
+            canvas.height = canvasHeight;
+            ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+            let playButton = document.querySelector("#play-button");
+            let pauseButton = document.querySelector("#pause-button");
+            pauseButton.onclick = function () {
+                isPaused = true;
+                pauseButton.classList.add("disabled");
+                playButton.classList.remove("disabled");
+            };
+            playButton.onclick = function () {
+                if (isPaused) {
+                    pauseButton.classList.remove("disabled");
+                    playButton.classList.add("disabled");
+                    isPaused = false;
+                    loop();
+                }
+            };
+            loop();
+        }
+
+        function loop() {
+            if (isPaused) return;
+            requestAnimationFrame(loop);
+            counter += 0.05;
+            if(counter > 360) {counter = 360;}
+
+            let dx = a * (y - x);
+            let dy = x * (b - z) - y;
+            let dz = x * y - c * z;
+
+            let dt = 0.01;
+            x += dx * dt;
+            y += dy * dt;
+            z += dz * dt;
+            // console.log("x = ", x, " y = ", y, " z = ", z);
+
+            ctx.save();
+            ctx.translate(canvasWidth / 2, canvasHeight / 2); //https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/Translation,Rotation,andScaling/Translation,Rotation,andScaling.html#//apple_ref/doc/uid/TP40010542-CH8-SW1
+            //ctx.fillStyle = "white";
+            let value = 255 - (z * scale);
+            ctx.fillStyle = `rgb(${value}, ${255}, ${255 - value})`;
+            //ctx.fillStyle = `hsl(${counter},100%,50%)`;
+            ctx.fillRect(x * scale, y * scale, 2, 2);
+            ctx.restore();
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <section id="canvas-controls">
+        <button id="play-button" class="disabled">Play</button>
+        <button id="pause-button">Pause</button>
+    </section>
+</body>
+
+</html>

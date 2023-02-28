@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <title>Cubic Bezier Curves</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: rgb(241, 241, 241);
+        }
+    </style>
+    <script>
+        // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
+        "use strict";
+        let canvas, ctx;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+            cubicCurve();
+        }
+
+        // Cubic Bezier Curves: Requires 3 points, two control points and an end point
+        // bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+        function cubicCurve() {
+            ctx.save();
+            ctx.lineWidth = 3;
+
+            // Define the points as {x, y}
+            let start = { x: 35, y: 75 };
+            let cp1 = { x: 75, y: 200 };
+            let cp2 = { x: 250, y: 80 };
+            let end = { x: 200, y: 225 };
+
+            // Start Point: (x, y)
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI);  // Start point
+            ctx.closePath();
+            ctx.fill();
+
+            // Cubic Bézier curve
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+            ctx.stroke();
+
+            // End Point: (x, y)
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI);      // End point
+            ctx.closePath();
+            ctx.fill();
+
+            // Control Points: [(x, y), (x, y)]
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(cp1.x, cp1.y, 5, 0, 2 * Math.PI);  // Control point one
+            ctx.arc(cp2.x, cp2.y, 5, 0, 2 * Math.PI);  // Control point two
+            ctx.fill();
+            ctx.restore();
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas height="800" width="700"></canvas>
+</body>
+
+</html>

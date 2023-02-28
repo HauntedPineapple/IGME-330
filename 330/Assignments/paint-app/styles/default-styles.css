@@ -1,0 +1,14 @@
+body {
+    background: #d3d3d3;
+    font-family: tahoma, verdana, sans serif;
+}
+
+#main-canvas {
+    background: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid #626262;
+}
+
+#controls {
+    user-select: none;
+}

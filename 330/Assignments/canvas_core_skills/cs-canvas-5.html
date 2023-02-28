@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Fifth Canvas</title>
+    <link rel="stylesheet" type="text/css" href="styles/canvas-style.css">
+    <script src="src/canvas-5.js"></script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section id="canvas-controls">
+        <button id="play-button">Play</button>
+        <button id="pause-button" class="disabled">Pause</button>
+        <button id="clear-button">Clear Canvas</button>
+    </section>
+
+    <section id="checkboxes">
+        <span>
+            <input type="checkbox" id="rectangles-checkbox" checked>
+            <label for="rectangles-checkbox">Rectangles</label>
+        </span>
+        <span>
+            <input type="checkbox" id="circles-checkbox" checked>
+            <label for="Circles-checkbox">Circles</label>
+        </span>
+        <span>
+            <input type="checkbox" id="arcs-checkbox" checked>
+            <label for="arcs-checkbox">Arcs</label>
+        </span>
+        <span>
+            <input type="checkbox" id="lines-checkbox" checked>
+            <label for="lines-checkbox">Lines</label>
+        </span>
+    </section>
+
+    <section id="instructions">
+        <p>Click on the screen to "spraypaint" rectangles <i>(you probably want the screensaver to be paused)</i></p>
+    </section>
+
+    <section id="add-shapes-controls">
+        <button id="rectangle" onclick="drawRandomRectangle()">Add Random Rectangle</button>
+        <button id="circle" onclick="drawRandomCircle()">Add Random Circle</button>
+        <button id="circle" onclick="drawRandomArc()">Add Random Arc</button>
+        <button id="line" onclick="drawRandomLine()">Add Random Line</button>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>XHR - Load JSON</title>
+	<style>
+		body {
+			font-family: sans-serif;
+		}
+	</style>
+
+</head>
+
+<body>
+	<h2>XHR - Load JSON | <a href="https://pokeapi.co/">Pokemon API</a></h2>
+
+	<hr>
+	<button id="my-button">Load Data</button>
+	<div id="output">Click button to load</div>
+
+	<script>
+		document.querySelector("#my-button").onclick = loadJsonXHR;
+		function loadJsonXHR() {
+			let url = "https://pokeapi.co/api/v2/pokemon/";
+			let searchTerm = "Noibat"
+			url += searchTerm.toLowerCase();
+
+			const xhr = new XMLHttpRequest();
+			xhr.onload = (e) => {
+				console.log(`In onload - HTTP Status Code = ${e.target.status}`);
+				let json;
+				try {
+					json = JSON.parse(e.target.responseText);
+				} catch {
+					document.querySelector("#output").innerHTML = "<p>BAD JSON!</p>";
+					return;
+				}
+
+				let sprite = document.createElement("img");
+				sprite.setAttribute("alt", searchTerm +" sprite");
+				//sprite.setAttribute("src", json["sprites"]["front_default"]);
+				sprite.setAttribute("src", json["sprites"]["other"]["official-artwork"]["front_default"]);
+				sprite.setAttribute("width", 150);
+
+				let pokeInfo = `<h3>${json["name"].toUpperCase()}</h3>`;
+				pokeInfo += "<p>Type: ";
+				pokeInfo += json["types"][0]["type"]["name"];
+				if(json["types"].length == 2){
+					pokeInfo +=` & ${json["types"][1]["type"]["name"]}`;
+				}
+				pokeInfo += "</p>";
+
+				document.querySelector("#output").innerHTML = pokeInfo;
+				document.querySelector("#output").appendChild(sprite);
+
+				console.log("json = ", json);
+				console.log("json = ", json["types"][0]["type"]["name"]);
+			}
+			xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+			xhr.open("GET", url);
+			xhr.send();
+		}
+	</script>
+</body>
+
+</html>

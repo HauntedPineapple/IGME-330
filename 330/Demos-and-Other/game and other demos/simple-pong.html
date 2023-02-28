@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Simple Pong</title>
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+	<style>
+		*{font-family: 'VT323', monospace;}
+		h2{margin-bottom:0;}
+		ul{margin-top:0;}
+	</style>
+</head>
+<body>
+<h1>Pong!</h1>
+<h2>Instructions:</h2>
+<ul>
+	
+</ul>
+<canvas id="mycanvas" width="400" height="400"></canvas>
+<script>
+	"use strict";
+	const canvas = document.querySelector("#mycanvas");
+	const ctx = canvas.getContext("2d");
+	const paddleMargin = 10;
+	const paddleWidth = 10;
+	const paddleHeight = 50;
+	const GameColor = {
+		background: 	"black",
+		paddle:				"white",
+		ball:					"red",
+		ui:						"white"
+	};
+	
+	const player = {
+		x: paddleMargin,
+		y: 40,
+		dx: 0,
+		dy: 2,
+		width: paddleWidth,
+		height: paddleHeight
+	};
+	
+	const enemy = {
+		x: canvas.width - paddleWidth - paddleMargin,
+		y: 40,
+		dx: 0,
+		dy: 3,
+		width: paddleWidth,
+		height: paddleHeight,
+		move(){
+			this.x += this.dx;
+			this.y += this.dy;
+		}
+	};
+	
+	const ball = {
+		x: 100,
+		y: 180,
+		dx: 2,
+		dy: 2,
+		width: 10,
+		height: 10,
+		move(){
+			this.x += this.dx;
+			this.y += this.dy;
+		}
+	};
+	
+	let playerScore = 0, enemyScore = 0;
+	
+	window.onload = function init(){
+		canvas.onmousemove = function(e){
+			player.y = e.clientY - e.target.offsetTop - player.height/2;
+		};
+		loop();
+	}
+	
+	function loop(timestamp){
+		requestAnimationFrame(loop)
+		ball.move();
+		
+		//move enemy
+		if (ball.y > enemy.y + enemy.height/2){
+			enemy.dy = Math.abs(enemy.dy);
+		}else{
+			enemy.dy = -Math.abs(enemy.dy);
+		}
+
+		if (Math.abs(ball.y - enemy.y) > enemy.height/2) enemy.move();
+		
+		// check top
+		if(ball.y < 0 && ball.dy < 0){
+			ball.dy *= -1;
+		}
+		
+		// check bottom
+		if(ball.y > canvas.height - ball.height/2 && ball.dy > 0){
+			ball.dy *= -1;
+		}
+		
+		// check left
+		if(ball.x < player.x + player.width && ball.dx < 0){
+			if(ball.y > player.y - ball.height - player.height/2 && ball.y < player.y + player.height + ball.height){
+				ball.dx *= -1;
+				let spinY = whereOnPaddle(ball,player);
+				ball.dy = spinY * 8;
+				//console.log(spinY);
+			}else{
+				enemyScore++;
+				reset();
+			}
+		}
+		
+		// check right
+		if(ball.x > enemy.x - ball.width && ball.dx > 0){
+			// check enemy paddle
+			if(ball.y > enemy.y - ball.height - enemy.height/2 && ball.y < enemy.y + enemy.height + ball.height){
+				ball.dx *= -1;
+				let spinY = whereOnPaddle(ball,enemy);
+				ball.dy = spinY * 8;
+			}else{
+				playerScore++;
+				reset();
+			}
+		}
+		
+	
+		
+		
+		// draw background
+		ctx.fillStyle = GameColor.background;
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+		
+		// draw score
+		ctx.fillStyle = GameColor.ui;
+		ctx.font = "24pt VT323, monospace"
+		ctx.textAlign = "center";
+		ctx.fillText(playerScore,100,30);
+		ctx.fillText(enemyScore, canvas.width - 100,30);
+		
+		// draw paddles
+		ctx.fillStyle = GameColor.paddle;
+		ctx.fillRect(player.x,player.y,player.width,player.height);
+		
+		ctx.fillStyle = GameColor.paddle;
+		ctx.fillRect(enemy.x,enemy.y,enemy.width,enemy.height);
+		
+		// draw ball
+		ctx.fillStyle = GameColor.ball;
+		ctx.fillRect(ball.x,ball.y,ball.width,ball.height);
+		
+	}
+	
+	function reset(){
+		ball.x = canvas.width/2; 
+		ball.y = (Math.random() * canvas.width/2) + canvas.width/4;
+		ball.dx *= -1;
+		ball.dy = Math.random() < .5 ? 2 : -2;
+	}
+	
+	function whereOnPaddle(ball,paddle){
+		return (ball.y - paddle.y)/paddle.height - .5; // -.5 to +.5
+	}
+
+</script>
+</body>
+</html>

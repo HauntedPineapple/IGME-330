@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Tester</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Andada+Pro&family=IBM+Plex+Sans+Thai+Looped&family=Prompt&display=swap"
+        rel="stylesheet">
+
+    <style>
+    </style>
+</head>
+
+<body>
+    <pkmn-header data-src="images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+    <!-- <h1 class="is-size-1 px-4 py-3 has-background-info">PokeFinder App</h1> -->
+
+    <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <img class="navbar-item" src="images/Poké_Ball_icon.svg" alt="pokeball" width="50">
+            <a class="navbar-burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-start">
+                <b class="navbar-item"> Home </b>
+                <p class="navbar-item is-hoverable"> App </p>
+                <p class="navbar-item is-hoverable"> Favorites </p>
+                <p class="navbar-item is-hoverable"> Documentation </p>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+
+        <div id="search-form" class="field">
+            <div class="columns">
+                <div id="search-input-area" class="column is-two-fifths">
+                    <label for="text-input" class="label is-size-6">Pokemon Name: </label>
+                    <div class="control">
+                        <input type="text" id="text-input" class="is-large">
+                        <button id="search-button" class="button is-small is-danger is-outlined">Search</button>
+                    </div>
+                </div>
+
+                <div id="result-settings" class="column columns">
+                    <div id="sort-order-dropdown" class="column">
+                        <label class="label" for="sort-order">Sort results by:</label>
+                        <div class="select">
+                            <select name="sort-order" id="sort-order">
+                                <option value="numerical">ID Ascending</option>
+                                <option value="reverse-numerical">ID Descending</option>
+                                <option value="alphabetical">A -> Z</option>
+                                <option value="reverse-alphabetical">Z -> A</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="display-number-dropdown" class="column">
+                        <label class="label" for="display-number">Max results per page: </label>
+                        <div class="select">
+                            <select name="display-number" id="display-number">
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
+                                <option value="64">64</option>
+                                <option value="128">128</option>
+                                <option value="all">All</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!-- https://bulma.io/documentation/components/pagination/ -->
+        <div id="output" class="tile is-ancestor is-vertical m-5">
+            <div class="tile is-parent">
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+            </div>
+        </div>
+           
+        <pkmn-paginator data-num_pages="7"></pkmn-paginator>
+
+        <div id="pagination"></div>
+    </main>
+
+    <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+        data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+        data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+
+
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/pkmn-card.js"></script>
+    <script type="module" src="src/pkmn-header.js"></script>
+    <script type="module" src="src/pkmn-navbar.js"></script>
+    <script type="module" src="src/pkmn-paginator.js"></script>
+    <script type="module" src="src/pkmn-footer.js"></script>
+    <script type="module" src="src/pagination.js"></script>
+</body>
+
+</html>

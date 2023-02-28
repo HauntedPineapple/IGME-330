@@ -1,0 +1,101 @@
+/* SOURCE: https://fonts.google.com/specimen/Nunito */
+/* @font-face {
+    font-family: 'Nunito';
+    src: url('../data/fonts/nunito-regular-webfont.woff2') format('woff2'),
+        url('../data/fonts/nunito-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+/* SOURCE: https://fonts.google.com/specimen/Proza+Libre */
+/* @font-face {
+    font-family: 'Proza Libre';
+    src: url('../data/fonts/prozalibre-regular-webfont.woff2') format('woff2'),
+        url('../data/fonts/prozalibre-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+/* SOURCE: https://fonts.google.com/specimen/Chivo */
+/* @font-face {
+    font-family: 'Chivo';
+    src: url('../data/fonts/chivo-regular-webfont.woff2') format('woff2'),
+        url('../data/fonts/chivo-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+} */
+
+html {
+    font-size: 14pt;
+    background-color: #e0fbfc;
+    height: 100%;
+}
+
+hr {
+    display: block;
+    margin: 1rem auto;
+    border: 1px inset;
+    background-color: #e0fbfc;
+}
+
+header, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Proza Libre', sans-serif;
+}
+
+body {
+    font-family: 'Chivo', sans-serif;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    margin: 0px 10px;
+    padding: 10px 15px;
+}
+
+footer {
+    margin-top: 8px;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.15rem;
+}
+
+h6 {
+    font-size: 1.05rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+.hidden{
+    display: none;
+}
+
+.disabled{
+    user-select: none;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+#content {
+    flex: 1 0 auto;
+}

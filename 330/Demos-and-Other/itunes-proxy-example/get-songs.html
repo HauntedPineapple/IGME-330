@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Get Songs</title>
+	<script type="module">
+			const content = document.querySelector("#content");
+		
+			const searchForBand = () => {
+				
+			// 1. Clear UI
+			content.innerHTML = "";
+
+			// 2. Create an XHR object to download the web service
+			// https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/
+			const xhr = new XMLHttpRequest();
+		
+			// 3. Grab the search term
+			let term = document.querySelector("#searchterm").value;
+			// get rid of any leading and trailing spaces & encode spaces and special characters
+			term = encodeURIComponent(term.trim());
+			// if there's no term, use "muse"
+			term = term || "muse";
+	
+			// 4. Call the proxy server
+			const url = `get-songs-itunes.php?term=${term}`;
+			xhr.onerror = e => console.log("error=", e);
+	
+			xhr.onload = e => {
+				const jsonString = e.target.response;
+				console.log("jsonString = ", jsonString);
+			
+				// 5. update the UI by showing the results
+				let json;
+				try{
+					json = JSON.parse(jsonString);
+				}catch{
+					content.innerHTML = "A JSON parsing error occurred!"
+					return;
+				}
+		
+				const results = json.results;
+				let s = `<h2>Search results for "${decodeURI(term)}"`;
+				for(let r of results){
+					s += `<p>${r.trackName} (${r.collectionName}) --&gt; <audio src='${r.previewUrl}' controls></p>`;
+					s += "<hr>";
+				}
+				content.innerHTML = s;
+			}; // end xhr.onload
+		
+			xhr.open("GET",url);
+			xhr.send();
+		};
+	
+		document.querySelector("#btn-search").onclick = searchForBand;
+		
+	
+	</script>
+</head>
+<body>
+	<h1>Get Song Previews!</h1>
+	<p>Our PHP script (a "proxy server") is downloading the iTunes API data for us</p>
+	
+	<p>Search Term --&gt; <input id="searchterm" type="text" size="20" maxlength="20" autofocus value="boxcar willie" /></p>
+	<p><button id="btn-search">Search for Band!</button></p>
+	<hr>
+	<section id="content">Click the button to do a search!</section>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Smiley</title>
+	<style type="text/css">
+		body {
+			background: #dddddd;
+		}
+
+		canvas {
+			background: #ffffff;
+			cursor: pointer;
+			margin-left: 10px;
+			margin-top: 10px;
+			box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+		}
+	</style>
+
+	<script>
+		"use strict";
+		// #1 - wait for page to load
+		window.onload = init;
+
+		function init() {
+			console.log("init() called");
+			// #2 - get pointer to <canvas> element on page
+			let canvas = document.querySelector('canvas');
+
+			// #3 - get pointer to "drawing context" and drawing API
+			let ctx = canvas.getContext('2d');
+
+			/* #4 - start drawing! */
+			// Sky
+			ctx.fillStyle = "#13afd6";
+			ctx.fillRect(0, 0, 750, 300);
+
+			// Ground
+			ctx.fillStyle = "#1EB732";
+			ctx.fillRect(0, 300, 750, 300);
+
+			// Ground line
+			ctx.lineWidth = 5;
+			ctx.strokeStyle = "#14A628";
+			ctx.beginPath();
+			ctx.moveTo(0, 300);
+			ctx.lineTo(750, 300);
+			ctx.closePath();
+			ctx.stroke();
+
+			// Sun
+			ctx.fillStyle = "#F2CB32";
+			ctx.strokeStyle = "#DFBB2A";
+			ctx.beginPath();
+			ctx.arc(675, 75, 50, 0, Math.PI * 2);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+
+			// Smiley
+			ctx.fillStyle = "#d6d436";
+			ctx.strokeStyle = "black";
+			ctx.beginPath();
+			ctx.arc(450, 250, 200, 0, Math.PI * 2);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			ctx.fillStyle = "black";
+			// 	eyes
+			ctx.beginPath();
+			ctx.arc(380, 220, 25, 0, Math.PI * 2);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.arc(520, 220, 25, 0, Math.PI * 2);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+			// 	mouth
+			ctx.beginPath();
+			ctx.arc(450, 300, 80, 0, Math.PI);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+
+			// Tree
+			ctx.fillStyle = "#57291b";
+			ctx.fillRect(75, 250, 25, 150);
+			ctx.fillStyle = "#0E8B2F";
+			ctx.strokeStyle = "#097526";
+			ctx.beginPath();
+			ctx.moveTo(87.5, 150);
+			ctx.lineTo(150, 325);
+			ctx.lineTo(25, 325);
+			ctx.closePath();
+			ctx.fill();
+			ctx.stroke();
+		}
+
+		console.log("In bottom of <script> tag!");
+	</script>
+
+</head>
+
+<body>
+	<canvas width="750" height="500">
+		Get a browser that supports Canvas!
+		<!-- The user will only see the above text if their browser is older and doesn't support <canvas> -->
+
+	</canvas>
+</body>
+
+</html>

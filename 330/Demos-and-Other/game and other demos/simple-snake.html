@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Simple Snake</title>
+	<link href="https://fonts.googleapis.com/css?family=VT323" rel="stylesheet">
+	<style>
+		.container {
+			display: grid;
+			grid-template-columns: 200px 200px;
+			grid-template-rows: 100px 100px;
+		}
+		*{font-family: 'VT323', monospace;}
+		h2{margin-bottom:0;}
+		ul{margin-top:0;}
+	</style>
+</head>
+<body>
+<h1>Snake!</h1>
+<h2>Instructions:</h2>
+<ul>
+	<li>Arrow keys to move</li>
+	<li>Eat the food, not yourself!</li>
+</ul>
+<canvas id="mycanvas" width="400" height="400"></canvas>
+<script>
+	"use strict";
+	const canvas = document.querySelector("#mycanvas");
+	const ctx = canvas.getContext("2d");
+	
+	const numCols = 20;
+	const numRows = 20;
+	const cellWidth = 20;
+	const cellPadding = 2;
+	const GameColor = {
+		background: 	"black",
+		food: 				"red",
+		snakeHead: 		"yellow",
+		snakeBody: 		"lime"
+	};
+	const snake = {
+		x: 10,
+		y: 10,
+		dx: 1, // "delta x" - i.e. direction of travel
+		dy: 0, // ditto
+		numSegments: 5,
+		body: [],
+		move(){
+			this.x += this.dx;
+			this.y += this.dy;
+		}
+	};
+	
+	const food = {
+		x: 15,
+		y: 15
+	};
+	
+	window.onload = function init(){
+		document.onkeydown = doKeydown;
+		setInterval(loop,1000/15);
+	
+		function doKeydown(e){
+			switch (e.keyCode){
+				case 37:  				// LEFT
+					snake.dx = -1;
+					snake.dy = 0;
+					break;
+				case 38: 					// UP
+					snake.dx = 0;
+					snake.dy = -1;
+					break;
+				case 39:  				// RIGHT
+					snake.dx = 1;
+					snake.dy = 0;
+					break;
+				case 40: 					// DOWN
+					snake.dx = 0;
+					snake.dy = 1;
+					break;
+			}	
+		}
+	}
+	
+	function loop(){
+		snake.move();
+
+		// check for wrap
+		if (snake.x < 0){
+			snake.x = numCols - 1;
+		}
+
+		if (snake.x > numCols - 1){
+			snake.x = 0;
+		}
+
+		if (snake.y < 0){
+			snake.y = numRows - 1;
+		}
+
+		if (snake.y > numRows-1){
+			snake.y = 0;
+		}
+		
+		// draw background
+		ctx.fillStyle = GameColor.background;
+		ctx.fillRect(0,0,canvas.width,canvas.height);
+		
+		// draw snake
+		for(let i=0;i<snake.body.length;i++){
+			if(i == snake.body.length-1){
+				// the head is yellow
+				ctx.fillStyle = GameColor.snakeHead;
+			}else{
+				// the body is green
+				ctx.fillStyle = GameColor.snakeBody;
+			}
+			ctx.fillRect(snake.body[i].x*cellWidth,snake.body[i].y*cellWidth,cellWidth-cellPadding,cellWidth-cellPadding);
+			
+			// did snake eat itself?
+			if (snake.body[i].x == snake.x && snake.body[i].y == snake.y){
+				snake.numSegments = 5;
+			}
+		}
+		
+		// add new head to snake
+		snake.body.push({x:snake.x,y:snake.y}); // add to end of array
+		
+		// shrink snake body if necessary
+		while(snake.body.length > snake.numSegments){
+			snake.body.shift(); // remove from beginning of array
+		}
+		
+		// if snake hit food
+		if(food.x == snake.x && food.y==snake.y){
+			// grow the snake
+			snake.numSegments ++;
+			// relocate the food
+			food.x = Math.floor(Math.random() * numCols);
+			food.y = Math.floor(Math.random() * numRows);
+		}
+		
+		// draw food
+		ctx.fillStyle = GameColor.food;
+		ctx.fillRect(food.x*cellWidth,food.y*cellWidth,cellWidth-cellPadding,cellWidth-cellPadding);
+	
+	}
+
+</script>
+</body>
+</html>

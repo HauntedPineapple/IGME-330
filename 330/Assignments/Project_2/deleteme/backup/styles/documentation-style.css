@@ -1,0 +1,51 @@
+main {
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-left: 15px;
+}
+
+h1 {
+    text-decoration: underline;
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-left: -10px;
+}
+
+ul, ol {
+    padding-left: 30px;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+code {
+    font-family: 'Roboto Mono', monospace;
+}
+
+section>a {
+    color: rgb(60, 60, 60);
+}
+
+a:hover {
+    color: #cf5c36;
+}
+
+.sublist-item {
+    padding: 0px;
+    list-style-type: circle;
+    margin-left: 20px;
+}
+
+.section {
+    padding: 10px 20px;
+}
+
+.code {
+    font-family: 'Roboto Mono', monospace;
+    font-size: 0.9rem;
+}

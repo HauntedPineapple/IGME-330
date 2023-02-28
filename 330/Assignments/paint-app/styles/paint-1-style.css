@@ -1,0 +1,25 @@
+#controls {
+    /* position: absolute;
+    z-index: 2;
+    left: 25px;
+    top: 25px; */
+    user-select: none;
+    margin-top: 5px;
+    padding: 10px 0px 10px 5px;
+}
+
+label {
+    font-size: 15px;
+    margin-right: 0.75em;
+}
+
+body {
+    background: #d3d3d3;
+    font-family: tahoma, verdana, sans serif;
+}
+
+#main-canvas {
+    background: #ffffff;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    border: 1px solid #626262;
+}

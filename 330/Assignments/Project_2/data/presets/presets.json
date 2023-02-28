@@ -1,0 +1,88 @@
+{
+	"presets": [
+		{
+			"title": "Default",
+			"settings": {
+				"isPlaying": "SKIP",
+				"currentTrack": "SKIP",
+				"mode": "linear",
+				"displayAs": "bars",
+				"placement": "bottom",
+				"orientation": "horizontal",
+				"backgroundColor": "#000000",
+				"fillColor": "#878787",
+				"lineColor": "#FFFFFF",
+				"density": 128,
+				"spacing": 6,
+				"barWidth": 0,
+				"barHeight": 0,
+				"baselinePosition": 0,
+				"lineWidth": 1,
+				"trebleOn": false,
+				"trebleGain": 0,
+				"bassOn": false,
+				"bassGain": 0,
+				"distortionOn": false,
+				"distortionGain": 0,
+				"bitCrusherOn": false,
+				"bitCrusherGain": 0
+			}
+		},
+		{
+			"title": "Maroon Sea Wheel",
+			"settings": {
+				"isPlaying": "SKIP",
+				"currentTrack": "SKIP",
+				"mode": "radial",
+				"displayAs": "bars",
+				"placement": "middle",
+				"orientation": "horizontal",
+				"backgroundColor": "#570a0a",
+				"fillColor": "#2b2a7e",
+				"lineColor": "#56f57e",
+				"density": 64,
+				"spacing": 3,
+				"barWidth": 0,
+				"barHeight": 0,
+				"baselinePosition": 0,
+				"lineWidth": 1,
+				"trebleOn": false,
+				"trebleGain": 0,
+				"bassOn": false,
+				"bassGain": 0,
+				"distortionOn": false,
+				"distortionGain": 0,
+				"bitCrusherOn": false,
+				"bitCrusherGain": 0
+			}
+		},
+		{
+			"title": "Cherry Blossom",
+			"settings": {
+				"isPlaying": "SKIP",
+				"currentTrack": "SKIP",
+				"mode": "linear",
+				"displayAs": "bars",
+				"placement": "middle",
+				"orientation": "horizontal",
+				"backgroundColor": "#e9cece",
+				"fillColor": "#e8b5b5",
+				"lineColor": "#ae4d8f",
+				"density": 64,
+				"spacing": 4,
+				"barWidth": 0,
+				"barHeight": 0,
+				"baselinePosition": 450,
+				"lineWidth": 2,
+				"trebleOn": false,
+				"trebleGain": 0,
+				"bassOn": false,
+				"bassGain": 0,
+				"distortionOn": false,
+				"distortionGain": 0,
+				"bitCrusherOn": false,
+				"bitCrusherGain": 0
+			}
+		}
+	]
+}

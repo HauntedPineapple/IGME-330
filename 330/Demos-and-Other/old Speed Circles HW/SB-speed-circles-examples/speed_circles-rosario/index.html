@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Speed Circles 1</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="bananastand.js"></script>
+</head>
+<body>
+	<div class="wrapper">
+		<!-- canvas -->
+		<canvas id="canvas" height="500" width="500"></canvas>
+		<!-- controls -->
+		<ul id="controls">
+			<li>
+				<label for="opacity_slider">Opacity:</label>
+				<input id="opacity_slider" type ="range" min ="0.1" max="1.0" step ="0.1" value ="0.3"/>
+				<span id="opacity_setting">&nbsp;</span>
+			</li>
+			<li>
+				<span>
+					<label for="mirror_checkbox">Mirror:</label>
+					<input type="checkbox" id="mirror_checkbox" checked>
+				</span>
+			</li>
+			<li id="size_choice_setting">
+				<span>
+					<label for="speedbased_checkbox">Speed based:</label>
+					<input type="radio" name="size" value="speed" checked>
+				</span>
+				<span>
+					<label for="randomsize_checkbox">Random size:</label>
+					<input type="radio" name="size" value="random">
+				</span>
+				<span>
+					<label for="customsize_checkbox">Custom size:</label>
+					<input type="radio" name="size" value="custom">
+				</span>
+			</li>
+			<li>
+				<label for="size_slider">Size:</label>
+				<input id="size_slider" type ="range" min ="1" max="100" step ="1" value ="40" />
+				<span id="size_setting">&nbsp;</span>
+			</li>
+			<li>
+		    	<span><input id="clearButton" type="button" value="Clear Canvas"/></span>
+		    	<span style="float:right"><input id='saveButton' type='button' value='Save Image'/></span>
+			</li>
+		</ul>
+
+	</div>
+
+	<header>
+		<h2>Homework</h2>
+		<p class="fade">Click and drag to start drawing. The faster you drag, the bigger the circles are.</p>
+	</header>
+</body>
+</html>

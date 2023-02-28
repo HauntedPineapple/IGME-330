@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Audio-Visual Playground</title>
+
+    <!-- Google Fonts Embed Here -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo&display=swap" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" type="text/css" href="styles/normalize.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-style.css">
+    <link rel="stylesheet" type="text/css" href="styles/app-style.css">
+
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/loader.js"></script>
+    <script type="module" src="src/app.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <custom-header data-title="Audio-Visual Playground" data-page="App"></custom-header>
+            <custom-navbar data-link1-name="About" data-link1-url="./about.html" data-link2-name="App"
+                data-link3-name="Documentation" data-link3-url="./documentation.html">
+            </custom-navbar>
+        </header>
+
+        <div id="canvas">
+            <canvas></canvas>
+        </div>
+
+        <main>
+            <div id="audio-row" class="controls-row">
+                <div class="form">
+                    <audio controls accept="audio/*" id="audio-player" src=""></audio>
+                </div>
+
+                <div class="select form is-normal">
+                    <select name="track-selector" id="track-selector">
+                        <option class="placeholder" selected disabled="disabled" value="">Select A Track</option>
+                        <option value="New Adventure Theme.mp3">New Adventure Theme</option>
+                        <option value="Peanuts Theme.mp3">Peanuts Theme</option>
+                        <option value="murmurs_from_the_land_forbidden.mp3">Murmurs From The Land Forbidden</option>
+                        <option value="millenia.mp3">Millenia</option>
+                        <option value="bubbles.mp3">Bubbles</option>
+                        <option value="upload">Uploaded File</option>
+                        <!-- <option value="VALUE.mp3">VALUE</option> -->
+                    </select>
+                </div>
+
+                <div id="file-input" class="file">
+                    <label class="file-label">
+                        <input class="file-input" type="file" accept="audio/*">
+                        <span class="file-cta">
+                            <img class="file-icon" src="data/images/musical-note.png" alt="">
+                            <span class="file-label">Choose a file…</span>
+                        </span>
+                    </label>
+                    <span class="file-name has-background-white">No file selected</span>
+                </div>
+                <!-- <div> <button id="fs-button" class="button is-info">Full Screen</button></div> -->
+            </div>
+            <hr>
+
+            <div id="mode-row" class="controls-row">
+                <span id="mode-radios" class="control">
+                    <b>Mode:</b>
+                    <label class="radio">
+                        <input type="radio" name="mode" value="linear" checked>
+                        Linear
+                    </label>
+                    <label class="radio" disabled>
+                        <input type="radio" name="mode" value="radial" disabled>
+                        Radial
+                    </label>
+                </span>
+
+                <span id="display-radios" class="control">
+                    <b>Display As:</b>
+                    <label class="radio">
+                        <input type="radio" name="display" value="lines">
+                        Lines
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="display" value="bars" checked>
+                        Bars
+                    </label>
+                    <label class="radio" style="display:none">
+                        <input type="radio" name="display" value="wavelength">
+                        Wavelength
+                    </label>
+                </span>
+            </div>
+            <hr>
+
+            <div id="color-position-size-row" class="controls-row">
+                <span id="color">
+                    <b class="is-underlined">Color</b>
+                    <div class="form">
+                        <div class="field">
+                            <label>
+                                <input id="background-picker" class="control" type="color" value="#000000"> Background
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label>
+                                <input id="fill-picker" class="control" type="color" value="#878787"> Bar Fill
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label>
+                                <input id="outline-picker" class="control" type="color" value="#FFFFFF"> Bar Outline
+                            </label>
+                        </div>
+                        <!-- <div class="field">
+                        <label>
+                            <input id="line-picker" class="control" type="color" value="#FFFFFF"> Line
+                        </label>
+                    </div> -->
+                    </div>
+                </span>
+
+                <span id="size">
+                    <b class="is-underlined">Size</b>
+                    <div>
+                        <label for="linewidth-slider">Line thickness: <span id="linewidth-display"></span></label>
+                        <div class="slider">
+                            <p>1</p>
+                            <input type="range" min="1" max="100" value="5" id="linewidth-slider">
+                            <p>100</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="barwidth-slider">Bar thickness: <span id="barwidth-display"></span></label>
+                        <div class="slider">
+                            <p>1</p>
+                            <input type="range" min="1" max="100" value="10" id="barwidth-slider">
+                            <p>100</p>
+                        </div>
+                    </div>
+                </span>
+
+                <span id="position">
+                    <b class="is-underlined">Position</b>
+                </span>
+            </div>
+
+            <div id="effects-row" class="controls-row">
+
+            </div>
+
+            <p class="mx-3"><b>NOTE: </b>This site is currently under construction</p>
+
+            <!-- <div class="select is-info form block">
+                <select name="PLACEHOLDER-selector" id="PLACEHOLDER-selector">
+                    <option value="VALUE">VALUE</option>
+                </select>
+            </div> -->
+
+            <!-- <div id="PLACEHOLDER-checkboxes" class="form block">
+                <div class="field">
+                    <label class="checkbox control" for="FIRST-checkbox">
+                        <input type="checkbox" id="FIRST-checkbox"> CHECKBOX
+                    </label>
+                </div>
+
+                <div class="field">
+                    <label class="checkbox control" for="SECOND-checkbox">
+                        <input type="checkbox" id="SECOND-checkbox"> CHECKBOX
+                    </label>
+                </div>
+
+                <div class="field">
+                    <label class="checkbox control" for="THIRD-checkbox">
+                        <input type="checkbox" id="THIRD-checkbox"> CHECKBOX
+                    </label>
+                </div>
+            </div> -->
+
+            <!-- <div id="PLACEHOLDER-buttons" class="form block">
+                <button id="FIRST-button" class="button is-link">BUTTON</button>
+                <button id="SECOND-button" class="button is-info">BUTTON</button>
+            </div> -->
+
+            <!-- <div id="PLACEHOLDER-radio" class="control block">
+                <label class="radio">
+                        <input type="radio" name="GROUP" value="VALUE" checked>
+                        LABEL
+                    </label>
+                    <label class="radio">
+                        <input type="radio" name="GROUP">
+                        LABEL
+                    </label>
+                <label class="radio" disabled>
+                    <input type="radio" name="GROUP" value="VALUE" disabled>
+                    Maybe
+                </label>
+            </div> -->
+
+            <!-- <div id="PLACEHOLDER-slider" class="control block">
+                <span>
+                    0
+                    <input type="range" min="0" max="100" value="0" id="FIRST-slider">
+                    100
+                </span>
+            </div> -->
+
+
+        </main>
+    </div>
+
+    <footer>
+        <custom-footer data-link1-name="Audrey Main" data-link1-url="https://www.linkedin.com/in/audrey-main/"
+            data-link2-name="IGME-330" data-link2-url="https://people.rit.edu/aam6039/330/" data-link5-name="GitHub"
+            data-link5-url="https://github.com/HauntedPineapple" data-link6-name="PokeFinder"
+            data-link6-url="https://people.rit.edu/aam6039/330/Assignments/Project_1/home.html"></custom-footer>
+    </footer>
+</body>
+
+</html>

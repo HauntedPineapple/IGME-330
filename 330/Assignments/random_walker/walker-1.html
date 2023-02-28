@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Walker-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <script src="src/walker.js"></script>
+    <script src="src/main.js"></script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <div class="controls">
+        <section class="buttons">
+            <button id="start-button">Start</button>
+            <button id="play-button" class="disabled">Play</button>
+            <button id="pause-button" class="disabled">Pause</button>
+            <button id="reset-button" class="disabled">Reset</button>
+        </section>
+        <section class="dropdown-controls">
+            <label class="dropdown">FPS:
+                <select id="speed-chooser">
+                    <option value="6">6</option>
+                    <option value="12" selected>12</option>
+                    <option value="30">30</option>
+                    <option value="60">60</option>
+                </select>
+            </label>
+            <label class="dropdown">Number of Walkers:
+                <select id="walker-chooser">
+                    <option value="1" selected>1</option>
+                    <option value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </label>
+            <!-- <label class="dropdown">Fade Rate:
+                <select id="fade-chooser">
+                    <option value="none" selected>None</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </label> -->
+        </section>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>GabDog 2</title>
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+        // import the Firebase Realtime Database library
+        import { getDatabase, ref, set, push, onValue, increment } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-database.js";
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAuYa58GK8czmGK4RmXPUMG26h2XjEETB8",
+            authDomain: "dog-names-ac133.firebaseapp.com",
+            databaseURL: "https://dog-names-ac133-default-rtdb.firebaseio.com",
+            projectId: "dog-names-ac133",
+            storageBucket: "dog-names-ac133.appspot.com",
+            messagingSenderId: "815550811581",
+            appId: "1:815550811581:web:1d3f3812752b4db7ea56d4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        const writeFavNameData = name => {
+            const db = getDatabase();
+            const favRef = ref(db, 'favorites/' + name);
+            set(favRef, {
+                name,
+                likes: increment(1)
+            });
+        };
+
+        let favsTable = document.querySelector("#favorites-table");
+        const favoritesChanged = (snapshot) => {
+            favsTable.innerHTML = '<tr><th>Name</th><th>Likes</th></tr>';
+            // TODO: clear #favorites-table
+            snapshot.forEach(fav => {
+                const childKey = fav.key;
+                const childData = fav.val();
+                console.log(childKey, childData);
+                // TODO: update #favorites-table
+                let rowItem = document.createElement("tr");
+                rowItem.innerHTML = `<td>${childData.name}</td>`;
+                rowItem.innerHTML += `<td>${childData.likes}</td>`;
+                favsTable.appendChild(rowItem);
+            });
+        };
+
+        const init = () => {
+            const db = getDatabase();
+            const favoritesRef = ref(db, 'favorites/');
+            onValue(favoritesRef, favoritesChanged);
+
+            btnSubmit.onclick = () => {
+                writeFavNameData(nameField.value);
+            };
+        };
+
+        init();
+
+    </script>
+</head>
+
+<body>
+    <h1>GabDog&trade;</h1>
+    <h3>We want to know - what's a good dog name?</h3>
+    <p>Name --> <input value="Rover" id="nameField"></p>
+    <button id="btnSubmit">Send Name to Server</button>
+    <hr>
+    <h3>Popular Names</h3>
+    <table id="favorites-table">
+        <tr>
+            <th>Name</th>
+            <th>Likes</th>
+        </tr>
+    </table>
+</body>
+
+</html>

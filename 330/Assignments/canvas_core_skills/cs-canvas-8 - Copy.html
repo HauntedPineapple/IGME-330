@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Eigth Canvas</title>
+    <link rel="stylesheet" type="text/css" href="styles/canvas-style.css">
+    <script>
+        // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Transformations
+        // https://github.com/tonethar/IGME-330-Master/blob/master/notes/8-canvas-transformations.md
+        'use strict';
+
+        let canvasWidth = 600, canvasHeight = 600;
+        let ctx, canvas;
+        let playButton, pauseButton;
+        let isPaused = true;
+
+        window.onload = init;
+
+        function init() {
+            console.log("page loaded!");
+
+            canvas = document.querySelector('canvas');
+            ctx = canvas.getContext('2d');
+
+            canvas.setAttribute("width", canvasWidth);
+            canvas.setAttribute("height", canvasHeight);
+            console.log("Canvas width: ", canvasWidth);
+            console.log("Canvas height: ", canvasHeight);
+
+            setupUI();
+
+            
+        }
+
+        function setupUI() {
+            canvas.onclick = canvasClicked;
+
+            // document.querySelector("#name-button").onclick = ()=>{}
+        }
+
+        // #region Event Handlers
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log("(" + mouseX + ", " + mouseY + ")");
+        }
+        // #endregion
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <!-- <button id="name-button">NAME</button> -->
+    </section>
+</body>
+
+</html>

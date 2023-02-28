@@ -1,0 +1,164 @@
+header {
+    font-family: 'Roboto', sans-serif;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+}
+
+#myButton {
+    color: #ffffff;
+    font-weight: bold;
+    padding: 5px 15px;
+}
+
+#myButton:active {
+    position: relative;
+    top: 1px;
+}
+
+/*Phone Breakpoint*/
+@media only screen and (min-width:320px) {
+    /* width is >= 320px*/
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    html, body, .container {
+        height: 100%;
+        margin: 0;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+        background-color: #871717;
+        color: #F5F5F5;
+        padding: 0.8rem;
+        margin: 0;
+        text-align: center;
+    }
+
+    #output {
+        text-align: center;
+        font-size: 1.25rem;
+    }
+
+    #myButton {
+        font-size: 1rem;
+        box-shadow: 0px 0px 0px 2px #d87979;
+        background-color: #d63d3d;
+        border-radius: 15px;
+        border: 1px solid #964e4e;
+        text-shadow: 0px 1px 0px #662828;
+    }
+
+    #myButton:hover {
+        background-color: #8f3838;
+    }
+}
+
+/*Tablet Breakpoint*/
+@media only screen and (min-width:768px) {
+    /* width is >= 768px*/
+
+    h1 {
+        font-size: 3rem;
+        background-color: #318717;
+    }
+
+    body {
+        font-size: 2rem;
+        color: rgb(70, 70, 70);
+    }
+
+    #myButton {
+        width: 300px;
+        height: 75px;
+        font-size: 1.5rem;
+        box-shadow: 0px 0px 0px 2px #c0f29fde;
+        background-color: #68a858;
+        border: 1px solid #4e965a;
+        text-shadow: 0px 1px 0px #286635;
+    }
+
+    #myButton:hover {
+        background-color: #388f38;
+    }
+}
+
+/*Desktop Breakpoint*/
+@media only screen and (min-width:1024px) {
+    /* width is >= 1024px*/
+
+    body {
+        font-size: 1rem;
+        color: black;
+        text-align: left;
+    }
+
+    h1 {
+        background-color: #174287;
+    }
+
+    .container {
+        display: block;
+        margin: 1rem;
+    }
+
+    #output {
+        text-align: left;
+    }
+
+    #myButton {
+        width: 275px;
+        height: 50px;
+        box-shadow: 0px 0px 0px 2px #9fb4f2;
+        background-color: #5874a8;
+        border-radius: 5px;
+        border: 1px solid #4e6096;
+        text-shadow: 0px 1px 0px #283966;
+    }
+
+    #myButton:hover {
+        background-color: #385f8f;
+    }
+}
+
+/*Desktop Breakpoint*/
+@media only screen and (min-width:1408px) {
+    /* width is >= 1408px*/
+
+    body {
+        font-size: 1.6rem;
+        text-align: left;
+    }
+
+    h1 {
+        font-size: 4rem;
+        background-color: #0b535a;
+    }
+
+    .container {
+        display: flex;
+    }
+
+    #output {
+        text-align: left;
+    }
+
+    #myButton {
+        box-shadow: 0px 0px 0px 2px #9ff2e0;
+        background-color: #0b9b58;
+        border-radius: 5px;
+        border: 1px solid #4e9686;
+        text-shadow: 0px 1px 0px #286656;
+    }
+
+    #myButton:hover {
+        background-color: #388f79;
+    }
+}

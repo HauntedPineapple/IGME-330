@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Tester</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <link rel="stylesheet" type="text/css" href="deleteme/tester.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Andada+Pro&family=IBM+Plex+Sans+Thai+Looped&family=Prompt&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* #search-button {
+            box-shadow: inset 0px 1px 0px 0px #cf866c;
+            background: linear-gradient(to bottom, #C3423F 5%, #CE6664 100%);
+            background-color: #C3423F;
+            border-radius: 3px;
+            border: 1px solid #942911;
+            color: #ffffff;
+            font-size: 0.8rem;
+            font-family: Prompt, sans-serif;
+            padding: 5px 10px;
+            text-shadow: 0px 1px 0px #854629;
+        }
+
+        #search-button:hover {
+            background: linear-gradient(to bottom, #CE6664 5%, #C3423F 100%);
+            background-color: #942911;
+            border: 1px solid #C3423F;
+        }
+
+        #search-button:active {
+            position: relative;
+            top: 1px;
+        } */
+    </style>
+</head>
+
+<body>
+    <pkmn-header data-src="images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+    <!-- <h1 class="is-size-1 px-4 py-3 has-background-info">PokeFinder App</h1> -->
+
+    <pkmn-navbar data-home="./home.html" data-app="./app.html" data-favorites="./favorites.html"
+        data-documentation="./documentation.html"></pkmn-navbar>
+    <!-- <nav class="navbar is-dark">
+        <div class="navbar-brand">
+            <img class="navbar-item" src="images/Poké_Ball_icon.svg" alt="pokeball" width="50">
+            <a class="navbar-burger" id="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
+        <div class="navbar-menu" id="nav-links">
+            <div class="navbar-start">
+                <b class="navbar-item"> Home </b>
+                <p class="navbar-item is-hoverable"> App </p>
+                <p class="navbar-item is-hoverable"> Favorites </p>
+                <p class="navbar-item is-hoverable"> Documentation </p>
+            </div>
+        </div>
+    </nav> -->
+
+    <main>
+
+        <div id="search-form" class="field">
+            <div class="columns">
+                <div id="search-input-area" class="column is-two-fifths">
+                    <label for="text-input" class="is-size-6">Pokemon Name: </label>
+                    <div class="control">
+                        <input type="text" id="text-input" class="is-large">
+                        <button id="search-button" class="button is-small is-danger is-outlined">Search</button>
+                    </div>
+                </div>
+
+                <div id="result-settings" class="column columns">
+                    <div id="sort-order-dropdown" class="column">
+                        <label for="sort-order">Sort results by:</label>
+                        <div class="select">
+                            <select name="sort-order" id="sort-order">
+                                <option value="alphabetical">A -> Z</option>
+                                <option value="reverse-alphabetical">Z -> A</option>
+                                <option value="numerical">ID Ascending</option>
+                                <option value="reverse-numerical">ID Descending</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="display-number-dropdown" class="column">
+                        <label for="display-number">Max results per page: </label>
+                        <div class="select">
+                            <select name="display-number" id="display-number">
+                                <option value="all">All</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="32">32</option>
+                                <option value="64">64</option>
+                                <option value="128">128</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="filter-area" class="">
+                <h3 class="is-size-5 has-text-weight-semibold">Filters</h3>
+                <div class="select">
+                    <select name="type-1" id="type-1" class="is-capitalized">
+                        <option value="none">type</option>
+                        <option value="normal">normal</option>
+                        <option value="fighting">fighting</option>
+                        <option value="flying">flying</option>
+                        <option value="poison">poison</option>
+                        <option value="ground">ground</option>
+                        <option value="rock">rock</option>
+                        <option value="bug">bug</option>
+                        <option value="ghost">ghost</option>
+                        <option value="steel">steel</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                        <option value="grass">grass</option>
+                        <option value="electric">electric</option>
+                        <option value="psychic">psychic</option>
+                        <option value="ice">ice</option>
+                        <option value="dragon">dragon</option>
+                        <option value="dark">dark</option>
+                        <option value="fairy">fairy</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="type-2" id="type-2" class="is-capitalized">
+                        <option value="none">type</option>
+                        <option value="normal">normal</option>
+                        <option value="fighting">fighting</option>
+                        <option value="flying">flying</option>
+                        <option value="poison">poison</option>
+                        <option value="ground">ground</option>
+                        <option value="rock">rock</option>
+                        <option value="bug">bug</option>
+                        <option value="ghost">ghost</option>
+                        <option value="steel">steel</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                        <option value="grass">grass</option>
+                        <option value="electric">electric</option>
+                        <option value="psychic">psychic</option>
+                        <option value="ice">ice</option>
+                        <option value="dragon">dragon</option>
+                        <option value="dark">dark</option>
+                        <option value="fairy">fairy</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="generation" id="generation" class="is-capitalized">
+                        <option value="none">All Generations</option>
+                        <option value="1">Generation 1</option>
+                        <option value="2">Generation 2</option>
+                        <option value="3">Generation 3</option>
+                        <option value="4">Generation 4</option>
+                        <option value="5">Generation 5</option>
+                        <option value="6">Generation 6</option>
+                        <option value="7">Generation 7</option>
+                        <option value="8">Generation 8</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div id="output" class="">
+            <!-- card rows go here -->
+            <pkmn-card></pkmn-card>
+            <pkmn-card></pkmn-card>
+            <div class="columns">
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+            </div>
+            <div class="columns">
+
+            </div>
+
+        </div>
+
+        <div id="output">
+            <div class="pokecard">
+                <input type="image" id="star-button" alt="*" src="images/empty-star.png" width="20">
+                <h2 id="name">Pokemon Name</h2>
+                <img id="sprite" src="images/questionmark.png">
+                <p id="type">Type</p>
+                <p id="pkmn-id">ID</p>
+                <div id="stats">
+                    <div id="hp">HP</div>
+                    <div id="speed">Speed</div>
+                    <div id="attack">Attack</div>
+                    <div id="special-attack">Sp Atk</div>
+                    <div id="defense">Defense</div>
+                    <div id="special-defense">Sp Def</div>
+                </div>
+            </div>
+
+            <div id="bulma-card" class="pokecard card">
+                <input type="image" id="star-button" alt="*" src="images/empty-star.png" width="20">
+                <h2 class="card-header-title is-centered is-size-4" id="name">Pokemon Name</h2>
+                <div class="card-image">
+                    <figure class="image">
+                        <img id="sprite" src="images/questionmark.png">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="content">
+                        <p id="type">Type</p>
+                        <p id="pkmn-id">ID</p>
+                        <div id="stats">
+                            <div id="hp">HP</div>
+                            <div id="speed">Speed</div>
+                            <div id="attack">Attack</div>
+                            <div id="special-attack">Sp Atk</div>
+                            <div id="defense">Defense</div>
+                            <div id="special-defense">Sp Def</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+
+
+
+        </div>
+
+        <!-- <div id="output" class="tile is-ancestor is-vertical m-5">
+
+            <div class="tile is-parent">
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+            </div>
+            <div class="tile is-parent">
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+                <pkmn-card></pkmn-card>
+            </div>
+
+        </div> -->
+
+
+    </main>
+
+    <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+        data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+        data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+
+
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/pkmn-card.js"></script>
+    <script type="module" src="src/pkmn-card-row.js"></script>
+    <script type="module" src="src/pkmn-header.js"></script>
+    <script type="module" src="src/pkmn-footer.js"></script>
+    <script type="module" src="src/pkmn-navbar.js"></script>
+    <script type="module" src="src/burgermenu.js"></script>
+    <script type="module" src="deleteme/tester.js"></script>
+    <script type="module" src="src/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+.pokecard {
+    max-height: 600px;
+    background-color: #f4f4f4;
+    border: 2px solid #afafaf;
+    overflow: auto;
+    transition: all .2s ease-in-out;
+}
+
+.pokecard:hover {
+    transform: scale(1.01);
+}
+
+#name {
+    margin-top: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+ img {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ #type, #pkmn-id {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+ #pkmn-id {
+    font-size: 1.05rem;
+    margin-top: 2px;
+}
+
+ #stats {
+    font-size: 1rem;
+    padding: 0.75rem;
+    padding-top: 0.25rem;
+    font-weight: normal;
+
+}
+
+#stats p {
+    display: inline;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    #stats {
+        text-align: center;
+    }
+}
+
+@media only screen and (min-width: 1100px) {
+  #stats {
+        text-align: center;
+    }
+}
+
+#star-button {
+    width: 15;
+    padding-left: 5px;
+    padding-top: 5px;
+    opacity: 0.4;
+    transition: all .2s ease-in-out;
+}
+
+#star-button:hover {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+#bulma-card{
+    border: solid red;
+}
+
+#search-form {
+    padding: 25px;
+    margin: 10px;
+
+    border: solid black;
+}
+
+#output {
+    padding: 15px;
+    margin: 8px;
+    border: dashed 2px black;
+}

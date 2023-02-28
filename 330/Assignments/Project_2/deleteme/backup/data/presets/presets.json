@@ -1,0 +1,20 @@
+{
+	"page-title" : "TUBAR - <u>T</u>ext'd <u>U</u>p <u>B</u>eyond <u>A</u>ll <u>R</u>ecognition",
+	"presets" : [
+		{
+			"title" : "TITLE",
+			"description" : "WORDS",
+			"colors" : ["red", "green", "blue"]
+		},
+		{
+			"title" : "TITLE",
+			"description" : "WORDS",
+			"colors" : ["red", "green", "blue"]
+		},
+		{
+			"title" : "TITLE",
+			"description" : "WORDS",
+			"colors" : ["red", "green", "blue"]
+		}
+	]
+}

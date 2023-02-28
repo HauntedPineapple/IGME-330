@@ -1,0 +1,11 @@
+https://www.w3schools.com/tags/tag_select.asp
+https://www.w3schools.com/html/html_form_input_types.asp
+https://bulma.io/documentation/components/pagination/
+https://bulma.io/documentation/components/navbar/
+https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/image
+https://www.w3schools.com/jsref/prop_win_localstorage.asp
+https://github.com/tonethar/IGME-230-Master/blob/master/notes/web-apps-9.md#iii-storing-objects-with-web-storage
+https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+https://www.w3schools.com/howto/howto_js_media_queries.asp
+https://developer.mozilla.org/en-US/docs/Web/API/Window/resize_event
+

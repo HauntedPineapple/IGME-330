@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Fourth Canvas</title>
+    <link rel="stylesheet" type="text/css" href="styles/canvas-style.css">
+    <script>
+        'use strict';
+
+        let WIDTH = 100;
+        let HEIGHT = 100;
+        let ctx;
+        let playButton, pauseButton, canvas;
+        let isPaused = true;
+        let createRectangles = true;
+        let createCircles = true;
+        let createLines = true;
+
+        window.onload = init;
+
+        function init() {
+            console.log("page loaded!");
+
+            playButton = document.querySelector("#play-button")
+            pauseButton = document.querySelector("#pause-button")
+            canvas = document.querySelector('canvas');
+            ctx = canvas.getContext('2d');
+
+            WIDTH = canvas.getAttribute("width");
+            console.log("Canvas width: ", WIDTH);
+            HEIGHT = canvas.getAttribute("height");
+            console.log("Canvas height: ", HEIGHT);
+
+            setupUI();
+
+            update();
+        }
+
+        function setupUI() {
+            canvas.onclick = canvasClicked;
+
+            pauseButton.onclick = function () {
+                isPaused = true;
+                pauseButton.classList.add("disabled");
+                playButton.classList.remove("disabled");
+            };
+
+            playButton.onclick = function () {
+                if (isPaused) {
+                    pauseButton.classList.remove("disabled");
+                    playButton.classList.add("disabled");
+                    isPaused = false;
+                    update();
+                }
+            };            
+
+            document.querySelector("#rectangles-checkbox").onclick = function (e) {
+                createRectangles = e.target.checked;
+            };
+        }
+
+        function update() {
+            if (isPaused) {
+                return;
+            }
+            requestAnimationFrame(update);
+
+            let rand = getRandomInt(0, 100);
+            if (rand <= 33) {
+                if (createRectangles) {
+                    drawRandomRectangle();
+                }
+            }
+            else if (rand <= 66) {
+                if (createCircles) drawRandomCircle();
+            }
+            else if (rand <= 99) {
+                if (createLines) drawRandomLine();
+            }
+        }
+
+        // #region Utility Functions
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getRandomColor() {
+            function getByte() {
+                return 55 + Math.round(Math.random() * 200);
+            }
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+        }
+
+        function drawRandomRectangle() {
+            drawRectangle(ctx,
+                getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT),
+                getRandomInt(10, 100), getRandomInt(10, 100),
+                getRandomColor(), getRandomInt(0, 30), getRandomColor());
+        }
+
+        function drawRandomCircle() {
+            drawCircle(ctx,
+                getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT),
+                getRandomInt(10, 100),
+                getRandomColor(), getRandomInt(0, 30), getRandomColor());
+        }
+
+        function drawRandomLine() {
+            drawLine(ctx,
+                getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT),
+                getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT),
+                getRandomInt(1, 50), getRandomColor());
+        }
+        // #endregion
+
+        // #region Event Handlers
+        function canvasClicked(e) {
+            let rect = e.target.getBoundingClientRect();
+            let mouseX = e.clientX - rect.x;
+            let mouseY = e.clientY - rect.y;
+            console.log("(" + mouseX + ", " + mouseY + ")");
+
+            for (let i = 0; i < 10; i++) {
+                let x = getRandomInt(-100, 100) + mouseX;
+                let y = getRandomInt(-100, 100) + mouseY;
+                let width = getRandomInt(10, 100);
+                let height = getRandomInt(10, 100);
+                let color = getRandomColor();
+                drawRectangle(ctx, x, y, width, height, color);
+            }
+        }
+        // #endregion
+
+        // #region Canvas Helper Functions
+        function drawRectangle(ctx, x, y, width, height, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
+            ctx.save();
+            ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.rect(x, y, width, height);
+            ctx.fill();
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        function drawCircle(ctx, x, y, radius, fillStyle = "black", lineWidth = 0, strokeStyle = "black") {
+            ctx.save();
+            ctx.fillStyle = fillStyle;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2, false);
+            ctx.fill();
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+                ctx.strokeStyle = strokeStyle;
+                ctx.stroke();
+            }
+            ctx.closePath();
+            ctx.restore();
+        }
+
+        function drawLine(ctx, x1, y1, x2, y2, lineWidth = 1, strokeStyle = "black") {
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineWidth = lineWidth;
+            ctx.strokeStyle = strokeStyle;
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+        // #endregion
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <section>
+        <button id="play-button">Play</button>
+        <button id="pause-button" class="disabled">Pause</button>
+    </section>
+
+    <section>
+        <span>
+            <input type="checkbox" id="rectangles-checkbox" checked>
+            <label for="rectangles-checkbox">Rectangles</label>
+        </span>
+    </section>
+
+    <section id="instructions">
+        <p>Click on the screen to "spraypaint" rectangles <i>(you probably want the screensaver to be paused)</i></p>
+    </section>
+
+    <!-- <section>
+        <button id="rectangle" onclick="drawRandomRectangle()">Add Random Rectangle</button>
+        <button id="circle" onclick="drawRandomCircle()">Add Random Circle</button>
+        <button id="line" onclick="drawRandomLine()">Add Random Line</button>
+    </section> -->
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>HDAWGYUDWGYUDWGYJ</title>
+</head>
+
+<body>
+    <header>
+    </header>
+
+    <main>
+        <div id="outputDiv">
+
+        </div>
+        <ul id="outputList">
+
+        </ul>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script type="module" src="tester.js" >       
+
+        outputDiv.innerHTML = "";
+        outputList.innerHTML = "";
+
+        const ALLOWEDSUFFIXES = ["jr", "mime", "o", "z", "oh", "koko", "le le", "bulu", "fini", "null", "rime"];
+        let names = ["RAttata", "Kommo-o", "nidoran-f", "Rayquaza", "deoxys-attack", "morpeko-full-belly", "Pikachu", "pumpkaboo-average", "tapu-bulu", "ho-oh", "mime-jr", "porygon-z", "oricorio-baile"];
+
+        let listHTML = "";
+        let textHTML = "";
+        let isValid = false;
+        for (let i = 0; i < names.length; i++) {
+            names[i]=names[i].toLowerCase(); 
+            isValid = false;
+            console.log("At the top of the loop, isValid = ", isValid);
+            console.log(`names[${i}] = `, names[i]);
+            if (!names[i].includes("-")) {
+                isValid = true;
+            }
+            else {
+                if(names[i].includes("nidoran")){
+                    let newName = "NIDORAN ";
+                    if(names[i].includes("f")){
+                        newName+="&#9792";
+                    }
+                    else{
+                        newName+="&#9794";
+                    }
+
+                    listHTML += `<li>"<b style="color:green">${newName}</b>" IS a valid name</li>`;
+                    continue;
+                }
+
+
+                let afterHyphen = names[i].split("-")[1];
+                console.log("String after hyphen: ", afterHyphen);
+                for (let suffix of ALLOWEDSUFFIXES) {
+                    console.log("testing suffix: ", suffix);
+                    if (afterHyphen.includes(suffix)) {
+                        isValid = true;
+                        console.log("isValid = ", isValid, "because ", `suffix "${afterHyphen} matches allowed suffix "${suffix}"`);
+                        break;
+                    }
+                }
+            }
+
+            if (isValid == true) {
+                console.log(`"${names[i].toUpperCase()}" IS a valid name`);
+                listHTML += `<li>"<b style="color:green">${names[i].toUpperCase()}</b>" IS a valid name</li>`;
+            }
+            else {
+                console.log(`"${names[i].toUpperCase()}" is NOT valid name`);
+                listHTML += `<li>"<b style="color:red">${names[i].toUpperCase()}</b>" is NOT a valid name</li>`;
+            }
+        }
+
+        outputList.innerHTML = listHTML;
+    </script>
+</body>
+
+</html>

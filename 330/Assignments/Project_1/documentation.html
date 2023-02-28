@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Documentation</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/documentation-style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap" rel="stylesheet">
+
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/loader.js"></script>
+</head>
+
+<body>
+    <header>
+        <pkmn-header data-src="images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+        <pkmn-navbar data-home="./home.html" data-app="./app.html" data-favorites="./favorites.html"
+            data-community="./community.html"></pkmn-navbar>
+        <h2 class="is-size-2 px-3 has-text-weight-bold">Project Documentation</h2>
+    </header>
+
+    <main>
+        <div id="requirements" class="section">
+            <h3>Project Requirements</h3>
+            <ul>
+                <li><a href="https://github.com/tonethar/IGME-330-Spring-2022/blob/main/projects/p1-checkpoint-1.md">Checkpoint 1 Requirements</a></li>
+                <li><a href="https://github.com/tonethar/IGME-330-Spring-2022/blob/main/projects/p1-checkpoint-2.md">Checkpoint 2 Requirements</a></li>
+                <li><a href="https://github.com/tonethar/IGME-330-Spring-2022/blob/main/projects/p1-final.md">Final Version Requirements</a></li>
+                <li><a href="https://github.com/tonethar/IGME-330-Spring-2022/blob/main/projects/330-code-style.md">Coding Standards and Conventions</a></li>
+            </ul>
+        </div>
+
+        <div id="api" class="section">
+            <h3>API Used</h3>
+            <!-- <b><a href="https://pokeapi.co/">PokeAPI</a></b> -->
+            <a href="https://pokeapi.co/"><img src="images/pokeapi_256.png" alt="PokeAPI" width="125"></a>
+            <ul>
+                <li><a href="https://pokeapi.co/docs/v2">PokeAPI Docs</a></li>
+                <li>Endpoint(s):</li>
+                <li class="sublist-item"><i>https://pokeapi.co/api/v2/pokemon/</i></li>
+                <li class="sublist-item"><i>https://pokeapi.co/api/v2/generation/</i></li>
+            </ul>
+        </div>
+
+        <div id="resources" class="section">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="https://github.com/NumminorihSF/json-pokemon">Other Pokemon JSON Data</a></li>
+                <li><a href="https://www.dafont.com/pokemon.font">Pokemon font</a></li>
+                <li><a href="https://fonts.google.com/specimen/IBM+Plex+Sans+Thai+Looped">IBM Plex Sans Thai Looped
+                        font</a></li>
+                <li><a href="https://bulma.io/documentation/">Bulma Documentation</a></li>
+                <li class="sublist-item"><a href="https://bulma.io/documentation/columns/">Columns</a></li>
+                <li class="sublist-item"><a href="https://bulma.io/documentation/layout/tiles/">Tiles</a></li>
+                <li class="sublist-item"><a href="https://bulma.io/documentation/form/general/">Forms</a></li>
+                <li class="sublist-item"><a href="https://bulma.io/documentation/components/card/">Cards</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web#web_technology_references">MDN Web Technology
+                        References</a></li>
+                <li class="sublist-item"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API">Web
+                        Storage API</a></li>
+                <li class="sublist-item"><a
+                        href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">Window.localStorage</a>
+                </li>
+                <li class="sublist-item"><a
+                        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reverse">Array.prototype.reverse()</a>
+                </li>
+                <li class="sublist-item"><a
+                        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">Array.prototype.sort()</a>
+                </li>
+                <li class="sublist-item"><a
+                        href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace">String.prototype.replace()</a>
+                </li>
+                <li class="sublist-item"><a
+                        href="https://developer.mozilla.org/en-US/docs/Web/API/Document/activeElement">Document.activeElement</a>
+                </li>
+                <!-- <li class="sublist-item"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all">Promise.all()</a></li> -->
+                <li><a
+                        href="https://github.com/tonethar/IGME-230-Master/blob/master/notes/web-apps-9.md#iii-storing-objects-with-web-storage">IGME-235
+                        Local Storage tutorial</a></li>
+                <li><a href="https://www.w3schools.com/html/html_form_input_types.asp">W3Schools HTML Input Types
+                        Reference</a></li>
+                <li><a
+                        href="https://stackoverflow.com/questions/263965/how-can-i-convert-a-string-to-boolean-in-javascript">StackOverflow:
+                        How can I convert a string to boolean in JavaScript?</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/JSDoc">JSDoc Resources</a></li>
+                <li class="sublist-item"><a href="https://jsdoc.app/index.html">JSDoc Documentation</a></li>
+                <li class="sublist-item"><a href="https://devhints.io/jsdoc">JSdoc Cheatsheet</a></li>
+                <!-- <li><a href="https://commons.wikimedia.org/wiki/File:Pok%C3%A9mon_Normal_Type_Icon.svg">Pokemon Type Icons: Andreuvv, CC BY-SA 4.0, via Wikimedia Commons</a></li> -->
+                <!-- <li><a href="https://javascript.info/async-await">Async/await</a></li> -->
+                <!-- <li><a href="LINK">LINK</a></li> -->
+            </ul>
+        </div>
+
+        <div id="proposal" class="section">
+            <h3>Proposal</h3>
+            <ul>
+                <li>Search term field that takes in a Pokemon name or part of a name</li>
+                <li>Sort By pulldowns</li>
+                <li class="sublist-item">A -> Z</li>
+                <li class="sublist-item">Z -> A</li>
+                <li class="sublist-item">ID Number</li>
+                <li>Filter By pulldowns</li>
+                <li class="sublist-item">Type(s)</li>
+                <li class="sublist-item">Generation</li>
+                <li>Number of results per page selector</li>
+                <li>Results pagination</li>
+            </ul>
+            <div id="mockup">
+                <img src="images/Mockup.jpg" alt="Low Fi Mockup" width="500">
+            </div>
+        </div>
+
+        <div id="noteworthy" class="section">
+            <h3>Noteworthy</h3>
+            <!-- Talk the project up - list the technologies you used (web components, Bulma, fetch, promises, etc)
+            Be sure to emphasize what you did outside of what we covered in class -->
+
+            <ul>
+                <li>Created custom search function with filters</li>
+                <li>Ability to sort favorites on favorites page as well as delete individual favorites</li>
+            </ul>
+        </div>
+
+        <div id="grading" class="section">
+            <h3>Grading</h3>
+            <!-- Describe how you met project requirements
+            Describe how you went "above and beyond" project requirements
+            In the comments field of the dropbox, grade your Project 1 submission -->
+            <p class="is-size-5 is-italic">Grade: 85</p>
+            <h5 class="is-size-5 ">Requirements Met</h5>
+            <ul id="requirements-list">
+                <li class="requirement">Web components present</li>
+                    <li class="requirement-sublist">Pokemon result card</li>
+                    <li class="requirement-sublist">Header</li>
+                    <li class="requirement-sublist">Footer</li>
+                    <li class="requirement-sublist">Navbar</li>
+                <li class="requirement">App functions and fails with user notifications</li>
+                <li class="requirement">App saves and loads UI state</li>
+                <li class="requirement">Favorites page uses local storage to store favorites with the ability to add and delete individual favorites</li>
+                <li class="requirement">Global navigation system</li>
+                <li class="requirement">Uses Bulma CSS</li>
+                <li class="requirement">Valid HTML and CSS</li>
+                <li class="requirement">ES6 modules used</li>
+                <li class="requirement">Coding conventions and standards followed</li>
+            </ul>
+            <h5 class="is-size-5">Above and Beyond</h5>
+            <p class="">&Tab;Although there is much that can be improved, I believe that I showed enough effort depsite
+                the handful of drawbacks that set my progress back a bit (ie: almost losing the flashdrive). I also had
+                to find some new data sources to make the app run properly and quickly, thus forcing me to restructure
+                my code quite a bit. Overall, while not perfect, I would say that the work I did in combination with the
+                outcome merits me at least a B.</p>
+        </div>
+
+        <div id="todo" class="section">
+            <h3>To Do</h3>
+            <!-- List any features that you would have liked to add if you had time
+            These could potentially be added to the app for Project 2, or over break/summer when you have time
+             -->
+            <ul>
+                <li>Add pagination</li>
+                <li>Rebuff the filters so that if two types are selected, only pokemon with exactly those two types are
+                    shown</li>
+                <li>Add ability to show megas and variants</li>
+                <li>Redesign the community page and add number of favorites to the results</li>
+                <li>Buff the design for all pages so that they look even nicer</li>
+                <!-- <li>LISTITEM</li> -->
+            </ul>
+        </div>
+    </main>
+
+    <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+        data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+        data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+</body>
+
+</html>

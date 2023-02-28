@@ -1,0 +1,49 @@
+* {
+    font-family: monospace;
+}
+
+h1{
+    font-size: 2.25em;
+}
+
+#scoreElement {
+    font-size: 3em;
+    width: 5em;
+    height: 2.5em;
+    color: white;
+    background-color: black;
+    border: 5px solid gray;
+    text-align: center;
+    padding-top: 1em;
+}
+
+body {
+    font-size: 1.2em;
+}
+
+footer {
+    font-size: 1em;
+    margin-top: 8px;
+    padding: 8px;
+    background-color: rgb(223, 222, 222);
+}
+
+#score-table {
+    overflow-x: auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    background-color: rgb(233, 218, 218);
+}
+
+th,
+td {
+    padding: 5px 10px;
+}
+
+th{
+    background-color: rgb(247, 184, 184);
+}

@@ -1,0 +1,55 @@
+canvas {
+    border: 1px solid #808080;
+    box-shadow: 0px 10px 13px -7px rgb(0, 0, 0), 5px 5px 15px 5px rgba(110, 110, 110, 0.25);
+    margin: 10px;
+}
+
+body {
+    font-family: sans-serif;
+    font-size: 1rem;
+}
+
+button {
+    user-select: none;
+    font-size: 1.1em;
+    background: linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+    background-color: #7892c2;
+    border-radius: 8px;
+    border: 1px solid #4e6096;
+    color: #ffffff;
+    padding: 10px 20px;
+    margin: 5px;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #7892c2 50%, #476e9e 100%);
+    background-color: #5574ad;
+}
+
+button:active {
+    background: linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+    background-color: #476e9e;
+    position: relative;
+    top: 1px;
+}
+
+section {
+    padding: 5px 0 5px 8px;
+}
+
+#instructions {
+    margin-left: 1.75em;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    color: #fff;
+    border-color: #a0a0a0;
+    background: #a0a0a0;
+}
+
+input[type=checkbox]{
+    width:18px;
+    height:18px;
+}

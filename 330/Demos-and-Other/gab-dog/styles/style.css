@@ -1,0 +1,23 @@
+* {
+    font-family: sans-serif;
+}
+
+#favorites-table {
+    overflow-x: auto;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    background-color: #e6e9da;
+}
+
+th,
+td {
+    padding: 5px 10px;
+}
+
+th{
+    background-color: #f7f3b8;
+}

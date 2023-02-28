@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>Animated Bezier Curves</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: rgb(241, 241, 241);
+        }
+    </style>
+    <script>
+        /* 
+        * https://en.wikipedia.org/wiki/B%C3%A9zier_curve 
+        * https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/DrawingLinesandShapes/DrawingLinesandShapes.html#//apple_ref/doc/uid/TP40010542-CH3-SW2
+        * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
+        * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+        */
+        "use strict";
+        let canvas, ctx;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+        }
+
+        // Cubic Bezier Curves: Requires 3 points, two control points and an end point
+        // bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+        function cubicCurve() {
+
+        }
+
+        // Quadratic Bezier Curves: Requires 2 points, one control point and one end point
+        // quadraticCurveTo(cpx, cpy, x, y)
+        function quadraticCurve() {
+
+        }
+
+    </script>
+</head>
+
+<body onload="init()"> <canvas height="800" width="700">
+    </canvas>
+</body>
+
+</html>

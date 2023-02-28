@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <title>Linear Gradient Examples</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: aliceblue;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <script>
+        // https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/GradientsandPatterns/GradientsandPatterns.html#//apple_ref/doc/uid/TP40010542-CH4-SW1
+        "use strict";
+        let canvas, ctx;
+        const startX = 15, startY = 15;
+        const topDownPad = 10, rightLeftPad = 10;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+            drawGradient();
+        }
+
+        // A linear gradient defines a color change along a line between two points
+        function drawGradient() {
+            let x = startX, y = startY;
+            let width = 90, height = 90;
+
+            // createLinearGradient(x1, y1, x2, y2)
+            // Color change occurs between these points
+            let grad = ctx.createLinearGradient(x, y, x + width, y);
+            // A color stop consists of a color and a position between 0 and 1, 
+            // inclusive, where 0 is the beginning of the gradient and 1 is the end
+            grad.addColorStop(0, 'black');
+            grad.addColorStop(1, 'white');
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, width, height); // fillRect(x, y, width, height)
+
+            x += width + rightLeftPad;
+
+            grad = ctx.createLinearGradient(x, y, x, y + height);
+            grad.addColorStop(0, 'black');
+            grad.addColorStop(1, 'white');
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, width, height);
+
+            x = startX;
+            y += height + topDownPad;
+
+            grad = ctx.createLinearGradient(x, y, x + 50, y);
+            grad.addColorStop(0, 'black');
+            grad.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, width, width);
+
+            x += width + rightLeftPad;
+            let g2 = ctx.createLinearGradient(x, y, x, y + 50);
+            g2.addColorStop(0, 'black');
+            g2.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            ctx.fillStyle = g2;
+            ctx.fillRect(x, y, width, height);
+
+            x += width + rightLeftPad;
+            let g3 = ctx.createLinearGradient(x, y, x + 50, y + 50);
+            g3.addColorStop(0, 'black');
+            g3.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            ctx.fillStyle = g3;
+            ctx.fillRect(x, y, width, height);
+
+            x += width + rightLeftPad;
+            let g4 = ctx.createLinearGradient(x + 50, y + 50, x, y);
+            g4.addColorStop(0, 'black');
+            g4.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            ctx.fillStyle = g4;
+            ctx.fillRect(x, y, width, height);
+
+            x = startX;
+            y += height + topDownPad;
+
+            grad = ctx.createLinearGradient(x + 10, y + 0, x + 390, y + 0);
+            grad.addColorStop(0, 'red');
+            grad.addColorStop(1 / 6, 'orange');
+            grad.addColorStop(2 / 6, 'yellow');
+            grad.addColorStop(3 / 6, 'green')
+            grad.addColorStop(4 / 6, 'aqua');
+            grad.addColorStop(5 / 6, 'blue');
+            grad.addColorStop(1, 'purple');
+            ctx.fillStyle = grad;
+            ctx.fillRect(x, y, 400, height);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas height="350" width="600">
+    </canvas>
+</body>
+
+</html>

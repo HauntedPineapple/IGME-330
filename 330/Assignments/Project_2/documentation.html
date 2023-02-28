@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Documentation</title>
+
+    <!-- Google Fonts Embed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chivo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-style.css">
+    <link rel="stylesheet" type="text/css" href="styles/documentation-style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    
+    <!-- javascript -->
+    <script type="module" src="src/loader.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <header>
+            <custom-header data-title="Audio-Visual Playground"></custom-header>
+            <custom-navbar data-link1-name="About" data-link1-url="./about.html" data-link2-name="App"
+                data-link2-url="./app.html" data-link3-name="Documentation">
+            </custom-navbar>
+            <h1 class="has-text-centered-mobile is-underlined mx-3 my-3">Documentation</h1>
+        </header>
+
+        <main>           
+            <div id="requirements" class="section">
+                <h3>Project Requirements</h3>
+                <a href="https://github.com/tonethar/IGME-330-Spring-2022/blob/main/projects/p2.md">Assignment Details</a>
+            </div>
+            <hr>
+
+            <div id="resources" class="section">
+                <h3>Resources</h3>
+                <section class="resource-section" id="bulma-section"> <a href="https://bulma.io/documentation/">Bulma</a>
+                    <ul>
+                        <li><a href="https://bulma.io/documentation/form/file/">File upload</a></li>
+                        <li><a href="https://bulma.io/documentation/form/select/">Select</a></li>
+                        <li><a href="https://bulma.io/documentation/form/general/">Form controls</a></li>
+                        <li><a href="https://bulma.io/documentation/helpers/color-helpers/">Color helpers</a></li>
+                        <li><a href="https://bulma.io/documentation/helpers/typography-helpers/">Typography helpers</a></li>
+                        <li><a href="https://bulma.io/documentation/components/navbar/">Navbar</a></li>
+                    </ul>
+                </section>
+                <section class="resource-section" id="mdn-section"> <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
+                    <ul>
+                        <li><a class="code"
+                                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file">&lt;input type="file"&gt;</a></li>
+                        <li><a class="code"
+                                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color">&lt;input type="color"&gt;</a></li>
+                        <li><a class="code"
+                                href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range">&lt;input type="range"&gt;</a></li>
+                    </ul>
+                </section>
+                <section class="resource-section" id="web-audio-section"> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API">Web Audio API</a>
+                    <ul>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API">Using the Web Audio API</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API">Visualizations with Web Audio API</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext">AudioContext</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode">AnalyserNode</a></li>            
+                            <li class="sublist-item"><a class="code" href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getFloatFrequencyData">AnalyserNode.getFloatFrequencyData()</a></li>
+                            <li class="sublist-item"><a class="code" href="https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode/getByteTimeDomainData">AnalyserNode.getByteTimeDomainData()</a></li>           
+                        <!-- <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/WaveShaperNode">WaveShaperNode</a></li> -->
+                        <!-- <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/GainNode">GainNode</a></li> -->
+                        <!-- <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/ConvolverNode">ConvolverNode</a></li> -->
+                        <!-- <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/BiquadFilterNode">BiquadFilterNode</a></li> -->
+                    </ul>
+                </section>
+                <section class="resource-section" id="canvas-section"> <a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API">Canvas API</a>
+                    <ul>
+                        <li><a href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40010542-CH1-SW1">Safari HTML5 Canvas Guide</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage">Basic usage of canvas</a></li>
+                        <li><a href="LINKURL">Transformations</a></li>
+                            <li class="sublist-item"><a href="https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/Translation,Rotation,andScaling/Translation,Rotation,andScaling.html#//apple_ref/doc/uid/TP40010542-CH8-SW1">Translation, Rotation, and Scaling</a></li>
+                            <li class="sublist-item"><a class="code" href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/translate">CanvasRenderingContext2D.translate()</a></li>
+                            <li class="sublist-item"><a class="code" href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/rotate">CanvasRenderingContext2D.rotate()</a></li>
+                        <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes">Drawing shapes with canvas</a></li>
+                    </ul>
+                </section>
+                <section class="resource-section" id="images-section">Images
+                    <ul>
+                        <li><a href="https://www.flaticon.com/free-icons/music">Music icons created by Freepik - Flaticon</a></li>
+                        <li><a href="https://www.rawpixel.com/image/524321/free-illustration-vector-music-sound-wave">Equalizer Image</a></li>
+                    </ul>
+                </section>
+                <section class="resource-section" id="fonts-section">Fonts
+                    <ul>
+                        <li><a style="font-family: 'Nunito', sans-serif;"
+                                href="https://fonts.google.com/specimen/Nunito">Nunito</a></li>
+                        <li><a style="font-family: 'Chivo', sans-serif;"
+                                href="https://fonts.google.com/specimen/Chivo">Chivo</a></li>
+                        <li><a style="font-family: 'Proza Libre', sans-serif;"
+                                href="https://fonts.google.com/specimen/Proza+Libre">Proza Libre</a></li>
+                        <li><a style="font-family: 'Roboto Mono', monospace;"
+                                href="https://fonts.google.com/specimen/Roboto+Mono">Roboto Mono</a></li>
+                    </ul>
+                </section>
+                <section class="resource-section" id="audio-section">Audio
+                    <ul>
+                        <li><a href="https://www.bensound.com/royalty-free-music/track/once-again">Once Again - Bensound</a></li>
+                        <li><a href="https://opengameart.org/content/cosmic-creature">Cosmic Creature - Vitalezzz</a></li>
+                        <li><a href="https://opengameart.org/content/bubbles">Bubbles - SouljahdeShiva</a></li>
+                        <li><a href="https://open.spotify.com/track/2uE9xSQBNqfs9MUiRuCGwl">Murmurs From the Land Forbidden - Monster Hunter: World OST (Akihiko Narito)</a></li>
+                        <!-- <li><a href="LINKURL">LINKNAME</a></li> -->
+                    </ul>
+                </section>
+                <section class="resource-section" id="other-section">Other
+                    <ul>
+                        <li><a href="https://stackoverflow.com/a/17776493">Stack Overflow: Default Dropdown Text</a></li>
+                        <li><a href="https://learningwebdesign.com/">Learning Web Design - A Beginner's Guide to HTML, CSS, JavaScript, and Web Graphics by Jennifer Niederst Robbins</a></li>
+                    </ul>
+                </section>
+            </div>
+            <hr>
+
+            <div id="noteworthy" class="section">
+                <h3>Noteworthy</h3>
+                The controls system is dynamic, the labels change when applicable to reflect the proper control usage. 
+                For example, the radio buttons that control the position are labelled 
+                "top", "middle", and "bottom" when the orietation is set to "horizontal", 
+                but when the orientation becomes "vertical", "top" becomes "left" and "bottom" 
+                becomes "right" and vice versa.
+            </div>
+            <hr>
+
+            <div id="grading" class="section">
+                <h3>Grading</h3>
+                The project I created allows the user to mess around and create a pretty customized experience.
+                Although even more controls could be added (and I plan to make this more robust in the future),
+                I would say that this version has a sufficient enough amount for what was required in the assignment details. 
+                Overall I would say that this project gets an A from me.
+            </div>            
+            <hr>
+
+            <div id="todo" class="section">
+                <h3>To Do</h3>
+                <ul>
+                    <li>Add Bulma play controls</li>
+                    <li>Add more presets</li>
+                    <li>Improve the style of the page</li>
+                    <li>Add more controls</li>
+                        <li class="sublist-item">Wavelength mode</li>
+                        <li class="sublist-item">Line style</li>
+                        <li class="sublist-item">Sound filters and effects</li>
+                    <li>Add more visual options to the canvas (ex: optional starfield)</li>
+                    <li>Allow the use of gradients for the colors</li>
+                    <li>Add a gradient creation tool so users can create custom gradients</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <custom-footer data-link1-name="Audrey Main" data-link1-url="https://www.linkedin.com/in/audrey-main/"
+            data-link2-name="IGME-330" data-link2-url="https://people.rit.edu/aam6039/330/" data-link5-name="GitHub"
+            data-link5-url="https://github.com/HauntedPineapple" data-link6-name="PokeFinder"
+            data-link6-url="https://people.rit.edu/aam6039/330/Assignments/Project_1/home.html"></custom-footer>
+    </footer>
+</body>
+
+</html>

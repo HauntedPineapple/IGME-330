@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project 1 Web App</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/default-styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/app-style.css">
+
+    <link rel="icon" type="image/png" href="../../favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="../../favicon-32x32.png" sizes="32x32" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&family=Inter&display=swap" rel="stylesheet">
+
+    <!-- Web Components Polyfill for older browsers -->
+    <script defer
+        src="https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/2.6.0/webcomponents-loader.min.js"></script>
+    <script type="module" src="src/loader.js"></script>
+    <script type="module" src="src/app.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <pkmn-header data-src="images/pikachu-peeking.png" data-title="PokéFinder"></pkmn-header>
+
+        <pkmn-navbar data-home="./home.html" data-favorites="./favorites.html" data-community="./community.html"
+            data-documentation="./documentation.html"></pkmn-navbar>
+
+        <!-- <h2 class="is-size-2 px-3 has-text-weight-bold">App Page</h2> -->
+    </header>
+
+    <main>
+        <!-- <p class="section">Nothing here yet... check back soon</p> -->
+        <div id="search-form" class="field">
+            <div class="columns">
+                <div id="search-input-area" class="column is-two-fifths">
+                    <label for="text-input" class="label is-size-6">Pokemon Name: </label>
+                    <div class="control">
+                        <input type="text" id="text-input" class="input">
+                        <button id="search-button" class="button my-3 is-normal is-danger is-outlined">Search</button>
+                    </div>
+                </div>
+
+                <div id="result-settings" class="column columns">
+                    <div id="sort-order-dropdown" class="column">
+                        <label class="label" for="sort-order">Sort results by:</label>
+                        <div class="select">
+                            <select name="sort-order" id="sort-order">
+                                <option value="numerical">ID Ascending</option>
+                                <option value="reverse-numerical">ID Descending</option>
+                                <option value="alphabetical">A -> Z</option>
+                                <option value="reverse-alphabetical">Z -> A</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- <div id="display-number-dropdown" class="column">
+                        <label class="label" for="display-number">Max results per page: </label>
+                        <div class="select">
+                            <select name="display-number" id="display-number">
+                                <option value="default">32</option>
+                                <option value="4">4</option>
+                                <option value="8">8</option>
+                                <option value="16">16</option>
+                                <option value="64">64</option>
+                                <option value="128">128</option>
+                            </select>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+            <div id="filter-area" class="">
+                <h3 class="is-size-5 has-text-weight-semibold">Filters</h3>
+                <div class="select">
+                    <select name="type-1" id="type-1" class="is-capitalized">
+                        <option value="none">type</option>
+                        <option value="normal">normal</option>
+                        <option value="fighting">fighting</option>
+                        <option value="flying">flying</option>
+                        <option value="poison">poison</option>
+                        <option value="ground">ground</option>
+                        <option value="rock">rock</option>
+                        <option value="bug">bug</option>
+                        <option value="ghost">ghost</option>
+                        <option value="steel">steel</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                        <option value="grass">grass</option>
+                        <option value="electric">electric</option>
+                        <option value="psychic">psychic</option>
+                        <option value="ice">ice</option>
+                        <option value="dragon">dragon</option>
+                        <option value="dark">dark</option>
+                        <option value="fairy">fairy</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="type-2" id="type-2" class="is-capitalized">
+                        <option value="none">type</option>
+                        <option value="normal">normal</option>
+                        <option value="fighting">fighting</option>
+                        <option value="flying">flying</option>
+                        <option value="poison">poison</option>
+                        <option value="ground">ground</option>
+                        <option value="rock">rock</option>
+                        <option value="bug">bug</option>
+                        <option value="ghost">ghost</option>
+                        <option value="steel">steel</option>
+                        <option value="fire">fire</option>
+                        <option value="water">water</option>
+                        <option value="grass">grass</option>
+                        <option value="electric">electric</option>
+                        <option value="psychic">psychic</option>
+                        <option value="ice">ice</option>
+                        <option value="dragon">dragon</option>
+                        <option value="dark">dark</option>
+                        <option value="fairy">fairy</option>
+                    </select>
+                </div>
+                <div class="select">
+                    <select name="generation" id="generation" class="is-capitalized">
+                        <option value="none">All Generations</option>
+                        <option value="1">Generation 1</option>
+                        <option value="2">Generation 2</option>
+                        <option value="3">Generation 3</option>
+                        <option value="4">Generation 4</option>
+                        <option value="5">Generation 5</option>
+                        <option value="6">Generation 6</option>
+                        <option value="7">Generation 7</option>
+                        <!-- <option value="8">Generation 8</option> -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="result-number-display">
+            <progress class="progress"  max="100">15%</progress>
+        </div> -->
+        <div id="output" class="tile is-ancestor is-vertical m-3">
+            <!-- card rows go here -->
+            <div class="has-text-light has-background-info-dark has-text-centered"><i
+                    class="px-2 py-2 has-text-weight-semibold is-size-5">Nothing yet...</i>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <pkmn-footer data-name="Audrey Main" data-profile_link="https://www.linkedin.com/in/audrey-main/"
+            data-org="IGME-330" data-org_link="https://people.rit.edu/aam6039/330/"
+            data-github_link="https://github.com/HauntedPineapple"></pkmn-footer>
+    </footer>
+</body>
+
+</html>

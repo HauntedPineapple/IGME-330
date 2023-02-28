@@ -1,0 +1,68 @@
+body {
+    background: #e2e0d8;
+    font-family: tahoma, verdana, sans serif;
+    font-size: 1.3rem;
+}
+
+canvas {
+    margin-left: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+    background: #fafafa;
+}
+
+section {
+    margin-bottom: 1rem;
+}
+
+button {
+    color: #ffffff;
+    font-size: 1.2rem;
+    padding: 10px;
+    margin-right: 15px;
+    border-radius: 8px;
+    border: 1px solid #0b0e07;
+    background: linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+    background-color: #7892c2;
+    user-select: none;
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+    background-color: #476e9e;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+}
+
+button[data-playing="yes"]:after {
+    content: "Pause";
+}
+
+button[data-playing="no"]:after {
+    content: "Play";
+}
+
+select {
+    font-size: 1.2rem;
+}
+
+#controls {
+    margin-left: 1rem;
+    user-select: none;
+}
+
+#play-button {
+    width: 6rem;
+}
+
+#fs-button {
+    width: 8rem;
+}
+
+#volume-label {
+    margin-left: 1rem;
+}

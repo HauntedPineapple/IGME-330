@@ -1,0 +1,71 @@
+<html>
+
+<head>
+    <title>Animated Gradient Example</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: aliceblue;
+            box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+    <script>
+        // https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/GradientsandPatterns/GradientsandPatterns.html#//apple_ref/doc/uid/TP40010542-CH4-SW16
+        "use strict";
+        let canvas, ctx;
+        const fps = 30;
+        let dt = 0; // delta time
+        let angle = 0;
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+            update();
+        }
+
+        // You can’t change the existing color stops in a 
+        // gradient after it’s created. 
+        // To animate a gradient, you need to either create 
+        // multiple gradients in advance and replace one with another, 
+        // or generate new gradients on the fly.
+        function update() {
+            // https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+            setTimeout(update, 1000 / fps); // 1000ms/# = #fps
+
+            // create a variable that cycles from -1 to 1
+            angle += 0.03;
+            let scalar = Math.sin(angle);
+
+            // create gradient that goes from bottom to top of canvas
+            // createLinearGradient(x1, y1, x2, y2)
+            let grad = ctx.createLinearGradient(0, canvas.height, 0, 0);
+
+            // start gradient at blue
+            grad.addColorStop(0, 'blue');
+
+            // create rgb color value that goes from black to white
+            // as the variable goes from -1 to 1
+            let r = parseInt(128 + 128 * scalar);
+            let g = parseInt(128 + 128 * scalar);
+            let b = parseInt(128 + 128 * scalar);
+
+            // add color stop with new rgb color
+            grad.addColorStop(1, "rgb(" + r + "," + g + "," + b + ")");
+
+            // clear canvas, fill canvas with gradient
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.save();
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.restore();
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas height="300" width="500">
+    </canvas>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Third Canvas</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid gray;
+        }
+
+        button {
+            display: block;
+            font-size: 20px;
+            margin-top: 8px;
+        }
+    </style>
+    <script>
+        'use strict';
+
+        const WIDTH = 640;
+        const HEIGHT = 480;
+        let ctx;
+
+        window.onload = init;
+
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function getRandomColor() {
+            function getByte() {
+                return 55 + Math.round(Math.random() * 200);
+            }
+            return "rgba(" + getByte() + "," + getByte() + "," + getByte() + ",.8)";
+        }
+
+        function init() {
+            console.log("page loaded!");
+            // #2 Now that the page has loaded, start drawing!
+
+            // A - `canvas` variable points at <canvas> tag
+            let canvas = document.querySelector('canvas');
+
+            // B - the `ctx` variable points at a "2D drawing context"
+            ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = "rgb(11,109,222)";
+            ctx.fillRect(0, 0, WIDTH, HEIGHT);
+        }
+
+        function update() {
+            requestAnimationFrame(update);
+
+            let rand = getRandomInt(0, 100);
+            if (rand <= 33) {
+                drawRandomRectangle();
+            }
+            else if (rand <= 66) {
+                drawRandomCircle();
+            }
+            else if (rand <= 99) {
+                drawRandomLine();
+            }
+        }
+
+        function drawRandomRectangle() {
+            ctx.fillStyle = getRandomColor();
+            ctx.strokeStyle = getRandomColor();
+            ctx.lineWidth = getRandomInt(0, 30);
+
+            ctx.beginPath();
+            ctx.rect(getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT), getRandomInt(10, 90), getRandomInt(10, 90));
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawRandomCircle() {
+            ctx.fillStyle = getRandomColor();
+            ctx.strokeStyle = getRandomColor();
+            ctx.lineWidth = getRandomInt(0, 30);
+
+            ctx.beginPath();
+            // ctx.arc(x, y, radius, startAngle, endAngle, clockwise)
+            ctx.arc(getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT), getRandomInt(10, 100), 0, Math.PI * 2, false);
+            ctx.closePath();
+            ctx.fill();
+            ctx.stroke();
+        }
+
+        function drawRandomLine() {
+            ctx.strokeStyle = getRandomColor();
+            ctx.lineWidth = getRandomInt(1, 50);
+
+            ctx.beginPath();
+            ctx.moveTo(getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT));
+            ctx.lineTo(getRandomInt(0, WIDTH), getRandomInt(0, HEIGHT));
+            ctx.closePath();
+            ctx.stroke();
+        }
+    </script>
+</head>
+
+<body>
+    <canvas width="640" height="480">
+        Get a real browser!
+    </canvas>
+
+    <button id="start" onclick="update()">Start Update()</button>
+
+    <!-- For testing purposes! -->
+    <!-- <button id="rectangle" onclick="drawRandomRectangle()">Add Rectangle</button> -->
+    <!-- <button id="circle" onclick="drawRandomCircle()">Add Circle</button> -->
+    <!-- <button id="line" onclick="drawRandomLine()">Add Line</button> -->
+</body>
+
+</html>

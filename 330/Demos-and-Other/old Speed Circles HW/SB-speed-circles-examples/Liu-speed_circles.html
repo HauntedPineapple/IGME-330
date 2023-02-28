@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Speed Circles 1</title>
+	<style type="text/css">
+	body{
+		background: #dddddd;
+		font-family:verdana,tahoma,sans-serif;
+		font-size:.8em;
+	}
+
+	#canvas,#controls{
+		background: #ffffff;
+		cursor: pointer;
+		margin-left: 10px;
+		margin-top: 10px;
+		box-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+		
+		margin-left: 10px;
+		margin-top: 10px;
+		
+	}
+
+	#controls{
+		padding:5px;
+		width:490px;
+	}
+
+	#controls div{
+		margin-bottom:5px;
+	}
+
+	#assignment{
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+	
+	</style>
+	
+	<script>
+		/*
+		   Note: 
+			1) We're writing our JS here in a somewhat "old school" fashion to start.
+			All of our functions and variables have been declared in the "global namespace".
+			This is OK because it's a good way to get started when you are new to JS.
+		   In the future we will write code in inside of private modules (functions) -  which is the best practice.
+		   
+		   2) We're also using W3C DOM Traversal methods like querySelector(), getElementsByTagName(),
+		   and getElementById() rather than jQuery - once again for reasons of pedagogy.
+		   In the "real world" (and later in the course) we'll be using jQuery.
+		   
+		   3) This code has not been tested in IE - but with a little tweaking I'm sure it could run.
+		*/
+
+"use strict";
+
+		// global variables
+		var canvas, ctx, isMouseDragging = null, penUsing = 1;
+		
+		
+		/* init() is called when the page loads */
+		function init(){
+			canvas = document.querySelector("#canvas");
+			ctx = canvas.getContext("2d");
+			canvas.addEventListener("mouseup", doMouseup);
+			canvas.addEventListener("mousedown", doMousedown);
+			canvas.addEventListener("mousemove", doMousemove);
+			setupUI();
+		}
+		
+		/* Hook up UI widgets to canvas */
+		function setupUI(){
+			/* clear button */
+			var clearButton = document.querySelector("#clearButton");
+			// call the clearCanvas() function when clicked
+			clearButton.addEventListener("click", clearCanvas); 
+			
+			/* save button */
+			var saveButton = document.querySelector("#saveButton");
+			// call an anonymous function when clicked
+			saveButton.addEventListener("click", function(e){
+				// open a new window and load the image in it
+				// http://www.w3schools.com/jsref/met_win_open.asp
+				var data = canvas.toDataURL(); 
+				var windowName = "canvasImage";
+				var windowOptions = "left=0,top=0,width=" + canvas.width + ",height=" + canvas.height +",toolbar=0,resizable=0";
+				window.open(data,windowName,windowOptions);
+			});
+
+			/* slider (just updates the text for now) */
+			var slider = document.querySelector("#slider1");
+			 // call an anonymous function when clicked
+			 slider.addEventListener("change", function(e){
+			 	//console.log("checked=" + e.target.value);
+			 	document.querySelector("#sliderResults").innerHTML = e.target.value;
+			 	penUsing = parseInt(e.target.value);
+			 });
+			 
+			 
+			 /* checkbox (just updates the text for now) */
+			 var myCheckbox = document.getElementById('myCheckbox');
+			 myCheckbox.addEventListener("change",function(e){
+				//console.log("checked=" + e.target.checked);
+				var msg = "";
+				ctx.globalAlpha = 1.0;
+				if( e.target.checked) {
+					msg = "alpha=0.5";
+					ctx.globalAlpha = 0.5;
+				}
+				document.querySelector("#checkboxResults").innerHTML = msg;
+			});	
+			 
+			 
+			/*
+				Newer browsers have an event architecture similar to what we see in AS3.
+				Here we're telling the slider to update the <span> with its value when the page first loads.
+				This event creation and dispatching code will definitely fail in older browsers,
+				so we'll do a quick "feature test" before we use it.
+				*/
+			if(document.createEvent){ // Only call the function if it exists. 
+				// document.createEvent(type);
+				// event.initUIEvent(type, canBubble, cancelable, view, detail) 
+				// element.dispatchEvent(event)
+				var e = document.createEvent("UIEvents");
+				e.initUIEvent("change", true, false, window, 1);
+				slider.dispatchEvent(e);
+				myCheckbox.dispatchEvent(e);
+			}
+		} // end function setupUI
+		
+		
+		
+		/* MOUSE EVENTS */
+		function doMouseup(e) {
+			isMouseDragging = null;
+		}
+
+		function doMousedown(e) {
+			isMouseDragging = getMouse(e);
+		}
+
+		function doMousemove(e) {
+			if (isMouseDragging) {
+				var mouse = getMouse(e);
+				drawCircle(mouse, distanceBetween(mouse.x, mouse.y, isMouseDragging.x, isMouseDragging.y));
+				isMouseDragging = mouse;
+			}
+		}
+
+		
+		/* CANVAS DRAWING CODE */
+		function drawCircle(mouse, radius){
+			ctx.lineWidth = 2;
+
+			var multipen = penCoordinates(mouse, penUsing);
+			for (var i = multipen.length - 1; i >= 0; i--) {
+				ctx.fillStyle = getRandomColor();
+				ctx.beginPath();
+				ctx.arc(multipen[i].x, multipen[i].y, radius, 0, Math.PI*2, false);
+				ctx.closePath();
+				ctx.fill();
+				ctx.stroke();
+			};
+		}
+		
+		function  clearCanvas(){
+			canvas.width = canvas.width;
+			// OR
+			// ctx.clearRect(0, 0, canvas.width, canvas.height);
+		}
+		
+		
+		
+		
+		/* HELPER FUNCTIONS */
+		
+		// adjusts coordinates of mouse over the window, to local mouse coordinates over the canvas
+		function getMouse(e){
+			var mouse = {};
+			mouse.x = e.pageX - canvas.offsetLeft;
+			mouse.y = e.pageY - canvas.offsetTop;
+			return mouse;
+		}
+		
+		// returns a random color of alpha 1.0
+		// http://paulirish.com/2009/random-hex-color-code-snippets/
+		function getRandomColor(){
+			var red = Math.round(Math.random()*254+1);
+			var green = Math.round(Math.random()*254+1);
+			var blue=Math.round(Math.random()*254+1);
+			var color='rgb('+red+','+green+','+blue+')';
+   			//	var color='rgba('+red+','+green+','+blue+',0.50)'; // 0.50 alpha
+   			return color;
+   		}
+
+		// used to calculate how fast the mouse is moving
+		function distanceBetween(x1,y1,x2,y2){
+			var dx = x2 - x1;
+			var dy = y2 - y1;
+			return Math.sqrt(dx*dx + dy*dy);
+		}
+		
+		function penCoordinates(mouse, numberOfPen) {
+			var returnPens = [];
+
+			switch(numberOfPen) {
+				case 1:
+					returnPens.push({x: mouse.x, y: mouse.y});
+					break;
+				case 2:
+					returnPens.push({x: mouse.x - 25, y: mouse.y});
+					returnPens.push({x: mouse.x + 25, y: mouse.y});
+					break;
+				case 3:
+					returnPens.push({x: mouse.x, y: mouse.y - 25});
+					returnPens.push({x: mouse.x - 25, y: mouse.y + 25});
+					returnPens.push({x: mouse.x + 25, y: mouse.y + 25});
+					break;
+				case 4:
+					returnPens.push({x: mouse.x + 25, y: mouse.y + 25});
+					returnPens.push({x: mouse.x + 25, y: mouse.y - 25});
+					returnPens.push({x: mouse.x - 25, y: mouse.y + 25});
+					returnPens.push({x: mouse.x - 25, y: mouse.y - 25});
+					break;
+				case 5:
+					returnPens.push({x: mouse.x, y: mouse.y - 25});
+					returnPens.push({x: mouse.x + 25, y: mouse.y});
+					returnPens.push({x: mouse.x - 25, y: mouse.y});
+					returnPens.push({x: mouse.x + 13, y: mouse.y + 25});
+					returnPens.push({x: mouse.x - 13, y: mouse.y + 25});
+					break;
+			}
+
+			return returnPens;
+		}
+		
+		window.addEventListener("load",init);
+		</script>
+	</head>
+	<body>
+		<canvas id="canvas" height="500" width="500"></canvas>
+		<div id="controls">
+			<div>
+				<span><input id="clearButton" type="button" value="Clear Canvas"/></span>
+				<span style="float:right"><input id='saveButton' type='button' value='Save Image'/></span>
+			</div>
+
+			<div>
+				<label for="slider1">Pens</label>
+				<input id="slider1" type ="range" min ="1" max="5" step ="1" value ="1"/>
+				<span style="float:right" id="sliderResults">???</span>
+			</div>
+			<div>
+				<span>
+					<label for="myCheckbox">Transparency</label>
+					<input type="checkbox" id="myCheckbox">
+				</span>
+				<span style="float:right" id="checkboxResults">???</span>
+			</div>
+
+			<hr/>
+			<div>
+				<p>Click and drag in the canvas window. The faster you drag, the bigger the circles are. Best viewed in Chrome or Safari.</p>
+			</div>
+		</div>
+
+		<div id="assignment">
+			<h2>Homework</h2>
+			<p>Enable the checkbox - checking it will cause all of the circles to be drawn at 50% alpha.</p>
+			<p>Create an additional variation of this <i>speed circle</i> theme, or on a similar theme such as <i>symmetry</i>.</p>
+			<p>Check out the Khan Academy examples (written in processing) here: <a href="http://www.khanacademy.org/cs/speed-circles/964929070">Speed Circles</a> & <a href="http://www.khanacademy.org/cs/mouse-interaction-symmetry/1009519497">Symmetry</a></p>
+			<p>Here's our in-class variation example: <i><a href="speed_circles_2.html">speed circles 2</a></i>.</p>
+		</div>
+	</body>
+	</html>

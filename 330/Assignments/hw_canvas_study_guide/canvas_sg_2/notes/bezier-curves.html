@@ -1,0 +1,188 @@
+<html>
+
+<head>
+    <title>Bezier Curves Notes</title>
+    <link rel="stylesheet" type="text/css" href="../styles/default-styles.css">
+    <style>
+        canvas {
+            background-color: rgb(241, 241, 241);
+        }
+    </style>
+    <script>
+        /* 
+        * https://en.wikipedia.org/wiki/B%C3%A9zier_curve 
+        * https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/HTML-canvas-guide/DrawingLinesandShapes/DrawingLinesandShapes.html#//apple_ref/doc/uid/TP40010542-CH3-SW2
+        * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
+        * https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+        */
+        "use strict";
+        let canvas, ctx;
+        let fps = 60;
+        let isPaused = false;
+        let animatedCP = { x: 275, y: 350 };
+        let theta = 0;
+        let delta = 0.025; // radians
+
+        function init() {
+            canvas = document.querySelector("canvas");
+            ctx = canvas.getContext("2d");
+
+            update();
+            // drawDividers();
+            // cubicCurve();
+            // quadraticCurve();
+            // animatedCurve();
+        }
+
+        // Cubic Bezier Curves: Requires 3 points, two control points and an end point
+        // bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+        function cubicCurve() {
+            ctx.save();
+            ctx.lineWidth = 3;
+
+            // Define the points as {x, y}
+            let start = { x: 35, y: 75 };
+            let cp1 = { x: 75, y: 200 };
+            let cp2 = { x: 250, y: 80 };
+            let end = { x: 200, y: 225 };
+
+            // Start Point: (x, y)
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI);  // Start point
+            ctx.closePath();
+            ctx.fill();
+
+            // End Point: (x, y)
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI);      // End point
+            ctx.closePath();
+            ctx.fill();
+
+            // Control Points: [(x, y), (x, y)]
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(cp1.x, cp1.y, 5, 0, 2 * Math.PI);  // Control point one
+            ctx.arc(cp2.x, cp2.y, 5, 0, 2 * Math.PI);  // Control point two
+            ctx.fill();
+
+            // Cubic Bézier curve
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.bezierCurveTo(cp1.x, cp1.y, cp2.x, cp2.y, end.x, end.y);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        // Quadratic Bezier Curves: Requires 2 points, one control point and one end point
+        // quadraticCurveTo(cpx, cpy, x, y)
+        function quadraticCurve() {
+            ctx.save();
+            ctx.lineWidth = 3;
+
+            // Define the points as {x, y}
+            let start = { x: 300, y: 200 };
+            let cp = { x: 425, y: 250 };
+            let end = { x: 500, y: 115 };
+
+            // Start Point: (x, y)
+            ctx.fillStyle = 'green';
+            ctx.beginPath();
+            ctx.arc(start.x, start.y, 5, 0, 2 * Math.PI);  // Start point
+            ctx.closePath();
+            ctx.fill();
+
+            // End Point: (x, y)
+            ctx.fillStyle = 'blue';
+            ctx.beginPath();
+            ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fill();
+
+            // Control Point: (x, y)
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(cp.x, cp.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            // Quadratic Bézier curve
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.quadraticCurveTo(cp.x, cp.y, end.x, end.y);
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function update() {
+            if (isPaused) return;
+            // https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+            setTimeout(update, 1000 / fps); // 1000ms/# = #fps
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawDividers();
+            cubicCurve();
+            quadraticCurve();
+
+            theta += delta;
+            animatedCP.x = (canvas.width / 2) + (Math.cos(theta) * 200);
+            animatedCP.y = (canvas.height / 2) + (canvas.height / 4) + (Math.sin(theta) * 125);
+            animatedCurve(animatedCP.x, animatedCP.y);
+        }
+
+        function animatedCurve(cpx = 275, cpy = 350) {
+            ctx.save();
+            ctx.lineWidth = 3;
+            ctx.strokeStyle = "purple";
+
+            let start = { x: 0, y: (canvas.height / 2) + (canvas.height / 4) };
+            let cp = { x: cpx, y: cpy };
+            let end = { x: canvas.width, y: (canvas.height / 2) + (canvas.height / 4) };
+
+            // Quadratic Bézier curve
+            ctx.beginPath();
+            ctx.moveTo(start.x, start.y);
+            ctx.quadraticCurveTo(cp.x, cp.y, end.x, end.y);
+            ctx.stroke();
+
+            // Control Point: (x, y)
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(cp.x, cp.y, 5, 0, 2 * Math.PI);
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function drawDividers() {
+            ctx.save();
+            ctx.lineWidth = 5;
+            ctx.strokeStyle = "black";
+            ctx.beginPath();
+            ctx.moveTo(canvas.width / 2, 0);
+            ctx.lineTo(canvas.width / 2, canvas.height / 2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height / 2);
+            ctx.lineTo(canvas.width, canvas.height / 2);
+            ctx.stroke();
+            ctx.closePath();
+            ctx.restore();
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas height="600" width="550"></canvas>
+    <!-- <ul>
+        <li><a href="bezier-curves-cubic.html">Cubic Bezier Curves</a></li>
+        <li><a href="bezier-curves-quadratic.html">Quadratic Bezier Curves</a></li>
+        <li><a href="bezier-curves-animated.html">Animated Bezier Curves</a></li>
+    </ul> -->
+</body>
+
+</html>

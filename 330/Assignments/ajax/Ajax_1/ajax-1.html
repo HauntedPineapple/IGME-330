@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>XHR - Load Text</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h2>XHR - Load Text File</h2>
+    <p>The <code>pet-names.txt</code> file contains popular dog and cat pet names, separated by commas.</p>
+    <p>Note that because XHR is loading a local file, this and the other examples will have to be run off a web server
+        rather than from your computer's hard drive (e.g. banjo.rit.edu or VSCode's liveserver etc)</p>
+
+    <hr>
+    <button id="my-button">Load Data</button>
+    <div id="output">Click button to load</div>
+
+
+    <script>
+        document.querySelector("#my-button").onclick = loadTextXHR;
+
+        function loadTextXHR() {
+            const url = "data/pet-names.txt";
+            const xhr = new XMLHttpRequest();
+
+            xhr.onload = (e) => {
+                console.log(`In onload - HTTP Status Code - ${e.target.status}`);
+                const text = e.target.responseText;
+                console.log(`Success, the file length is ${text.length}`);
+                const words = text.split(",");
+
+                // Turn array into HTML
+
+                // The long way
+                // let html = "<ol>";
+                // for (let w of words) {
+                //     html += `<li>${w}</li>`;
+                // }
+                // html += "</ol>";
+                // document.querySelector("#output").innerHTML = html;
+
+                // One liner
+                document.querySelector("#output").innerHTML = `<ol>${words.map(w=>`<li>${w}</li>`).join('')}</ol>`;
+                
+                // ========== Array.map() ==========
+                // "creates a new array populated with the results of calling a provided function on every element in the calling array"
+                // ex: 
+                // const array1 = [1, 4, 9, 16];
+                // const map1 = array1.map(x => x * 2);
+                // expected output: Array [2, 8, 18, 32]
+                // ========== Array.join ==========
+                // "creates and returns a new string by concatenating all of the elements in an array (or an array-like object), separated by commas or a specified separator string"
+                // ex:
+                // const elements = ['Fire', 'Air', 'Water'];
+                // console.log(elements.join());
+                // expected output: "Fire,Air,Water"
+                // console.log(elements.join(''));
+                // expected output: "FireAirWater"
+                // console.log(elements.join('-'));
+                // expected output: "Fire-Air-Water"
+            };
+
+            xhr.onerror = e => console.log(`In onerror - HTTP Status Code = ${e.target.status}`);
+            xhr.open("GET", url);
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<html>
+
+<head>
+	<title>Moving Curves</title>
+	<style>
+		canvas {
+			background: #ffffff;
+			cursor: pointer;
+			margin: 10px 0px 0px 10px;
+			box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+		}
+
+		button {
+			font-size: 1em;
+			background-color: #7892c2;
+			border-radius: 8px;
+			color: #ffffff;
+			padding: 10px 15px;
+		}
+
+		button:hover {
+			background-color: #4c6aa1;
+		}
+
+		button:active {
+			background: linear-gradient(to bottom, #7892c2 5%, #4c6aa1 100%);
+			background-color: #476e9e;
+			position: relative;
+			top: 1px;
+		}
+
+		.disabled {
+			cursor: not-allowed;
+			pointer-events: none;
+			color: #fff;
+			border-color: #a0a0a0;
+			background: #a0a0a0;
+		}
+
+		.controls {
+			user-select: none;
+			margin: 1.5em 0 0 1em;
+		}
+
+		input[type=checkbox] {
+			width: 18px;
+			height: 18px;
+		}
+	</style>
+	<script type="text/javascript">
+		// #region Global Variables
+		let canvas, ctx, playButton, pauseButton;
+		let isPaused = false, showPoints = true;
+		let showHistory = false;
+		let showQuadraticCurve = true, showCubicCurve = true;
+
+		let startA = { x: 0, y: 200 };
+		let endA = { x: 600, y: 200 };
+		let cpA = { x: 0, y: 200 };
+		let goingForwardA = true;
+		let thetaA = 0, deltaA = 0.02
+		let speedA = 1.5;
+
+		let startB = { x: 0, y: 300 };
+		let endB = { x: 600, y: 100 };
+		let cpB1 = { x: 0, y: 50 };
+		let cpB2 = { x: 600, y: 350 };
+		let goingForwardB1 = true;
+		let goingForwardB2 = false;
+		let thetaB1 = 0, thetaB2 = Math.PI * 2, deltaB = 0.05;
+		let speedB = 2;
+		// #endregion
+
+		function init() {
+			canvas = document.querySelector("canvas");
+			ctx = canvas.getContext("2d");
+
+			// Set up event handling
+			playButton = document.querySelector("#play-button");
+			pauseButton = document.querySelector("#pause-button");
+			setupUI();
+
+			ctx.lineWidth = 3;
+			update();
+		}
+
+		function update() {
+			if (isPaused) return;
+			// https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+			requestAnimationFrame(update);
+
+			if (showHistory) {
+				ctx.save();
+				ctx.globalAlpha = 1 / 30 * 2;
+				ctx.fillStyle = "#e3e5e8";
+				ctx.fillRect(0, 0, canvas.width, canvas.height);
+				ctx.restore();
+			}
+			else ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			if (showQuadraticCurve) {
+				if (goingForwardA) {
+					thetaA += deltaA;
+					cpA.x += speedA;
+					if (cpA.x > canvas.width) {
+						goingForwardA = false;
+					}
+				}
+				else {
+					thetaA -= deltaA;
+					cpA.x -= speedA;
+					if (cpA.x < 0) {
+						goingForwardA = true;
+					}
+				}
+				cpA.y = (canvas.height / 2) + Math.sin(thetaA) * 75;
+				drawQuadraticCurve(startA, cpA, endA, "blue");
+			}
+
+			if (showCubicCurve) {
+				if (goingForwardB1) {
+					thetaB1 += deltaB;
+					cpB1.x += speedB;
+					if (cpB1.x > canvas.width) {
+						goingForwardB1 = false;
+					}
+				}
+				else {
+					thetaB1 -= deltaB;
+					cpB1.x -= speedB;
+					if (cpB1.x < 0) {
+						goingForwardB1 = true;
+					}
+				}
+				if (goingForwardB2) {
+					thetaB2 += deltaB;
+					cpB2.x += speedB;
+					if (cpB2.x > canvas.width) {
+						goingForwardB2 = false;
+					}
+				}
+				else {
+					thetaB2 -= deltaB;
+					cpB2.x -= speedB;
+					if (cpB2.x < 0) {
+						goingForwardB2 = true;
+					}
+				}
+				cpB1.y = (canvas.height / 4) + Math.sin(thetaB1) * 50;
+				cpB2.y = (canvas.height / 2) + (canvas.height / 4) + Math.cos(thetaB2) * 50;
+				drawCubicCurve(startB, cpB1, cpB2, endB, "red");
+			}
+		}
+
+		// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/quadraticCurveTo
+		function drawQuadraticCurve(startPoint, controlPoint, endPoint, color = "black") {
+			ctx.save();
+			ctx.strokeStyle = color;
+			ctx.fillStyle = color;
+
+			ctx.beginPath();
+			ctx.moveTo(startPoint.x, startPoint.y);
+			ctx.quadraticCurveTo(controlPoint.y, controlPoint.x, endPoint.x, endPoint.y);
+			ctx.stroke();
+
+			if (showPoints) {
+				ctx.beginPath();
+				ctx.arc(controlPoint.x, controlPoint.y, 5, 0, 2 * Math.PI);
+				ctx.fill();
+			}
+
+			ctx.restore();
+		}
+
+		// https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/bezierCurveTo
+		function drawCubicCurve(startPoint, controlPointA, controlPointB, endPoint, color = "black") {
+			ctx.save();
+
+			ctx.strokeStyle = color;
+			ctx.fillStyle = color;
+
+			ctx.beginPath();
+			ctx.moveTo(startPoint.x, startPoint.y);
+			ctx.bezierCurveTo(controlPointA.x, controlPointA.y, controlPointB.x, controlPointB.y, endPoint.x, endPoint.y);
+			ctx.stroke();
+
+			if (showPoints) {
+				ctx.beginPath();
+				ctx.arc(controlPointA.x, controlPointA.y, 5, 0, 2 * Math.PI);
+				ctx.arc(controlPointB.x, controlPointB.y, 5, 0, 2 * Math.PI);
+				ctx.fill();
+			}
+
+			ctx.restore();
+		}
+
+		function setupUI() {
+			pauseButton.onclick = function () {
+				isPaused = true;
+				pauseButton.classList.add("disabled");
+				playButton.classList.remove("disabled");
+			};
+
+			playButton.onclick = function () {
+				if (isPaused) {
+					pauseButton.classList.remove("disabled");
+					playButton.classList.add("disabled");
+					isPaused = false;
+					update();
+				}
+			};
+
+			document.querySelector("#cubic-checkbox").onclick = function (e) {
+				showCubicCurve = e.target.checked;
+			};
+
+			document.querySelector("#quadratic-checkbox").onclick = function (e) {
+				showQuadraticCurve = e.target.checked;
+			};
+		}
+
+
+	</script>
+</head>
+
+<body onload="init()" style="background-color:#e0e0e0">
+	<canvas height="400" width="600"> </canvas>
+	<div class="controls">
+		<button id="play-button" class="disabled">Play</button>
+		<button id="pause-button">Pause</button>
+	</div>
+	<div class="controls">
+		<span>
+			<input type="checkbox" id="cubic-checkbox" checked>
+			<label for="cubic-checkbox">Show Cubic</label>
+		</span>
+		<span>
+			<input type="checkbox" id="quadratic-checkbox" checked>
+			<label for="quadratic-checkbox">Show Quadratic</label>
+		</span>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+* {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1.05rem;
+}
+
+h1, h2, h3 {
+    font-family: 'Ubuntu', sans-serif;
+}
+
+canvas {
+    margin-left: 5px;
+    border: 4px solid gray;
+}
+
+.controls {
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.dropdown {
+    margin-right: 10px;
+}
+
+section{
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+button {
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 15px;
+    background-color: #f24537;
+    border-radius: 6px;
+
+}
+
+button:hover {
+    background-color: #d14036;
+}
+
+button:active {
+    position: relative;
+    top: 1px;
+}
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    border-color: #a0a0a0;
+    background: #a0a0a0;
+    color:#ccc8c8;
+}
+
+#start-button {
+
+}
+
+#reset-button {
+
+}
+
+#play-button {
+
+}
+
+#pause-button {
+
+}
